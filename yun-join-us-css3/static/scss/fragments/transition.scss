@@ -1,0 +1,168 @@
+/************************************
+   过渡效果
+************************************/
+
+/* -> 设置右侧控制动画 */
+.slider-control {
+  li {
+    &:before {
+      @include transition(all .2s linear);
+    }
+  }
+}
+
+/* -> 设置心跳动画 */
+.down {
+  @include animation(down 2s ease-out 0s infinite);
+}
+
+/* -> 页面动画状态 */
+.page-active {
+  /* -> 设置 summary-title, summary-section动画 */
+  .summary {
+    @include transition(opacity .4s linear #{$page-delay + .4s});
+  }
+
+  .summary-box {
+    .summary-title, .summary-section {
+      @include transition(transform 1s ease-out $page-delay);
+    }
+  }
+
+  .summary-title {
+    /* -> 设置标题下的横杠动画 */
+    &:after {
+      @include transition(opacity .4s linear #{$page-delay + .4s});
+    }
+  }
+
+  /* page 1 */
+  .summary-box-1 {
+    /* -> 第二段内容多延迟 0.05s */
+    .summary-section:nth-of-type(2) {
+      @include transition-delay($page-delay + .05s);
+    }
+
+    /* -> 由于summary 完成需要1s，所以这里需要延迟至少1s */
+    .digit-box {
+      & > li {
+        &:first-child {
+          @include transition(all .8s ease-in #{$page-delay + 1s});
+        }
+
+        &:nth-child(2) {
+          @include transition(all .8s ease-in #{$page-delay + 1s + .4s});
+        }
+
+        &:nth-child(3) {
+          @include transition(all .8s ease-in #{$page-delay + 1s + .4s * 2});
+        }
+      }
+    }
+  }
+
+  /* ->主舞台动画 */
+  .main-stage-1 {
+    @include transition(opacity 1s linear $page-delay);
+
+    .chunk-1, .chunk-2 {
+      @include transition(transform 1s ease-in $page-delay);
+    }
+  }
+
+  /* page 2 */
+  .summary-box-2 {
+
+    .summary-title {
+      @include transition-duration(.8s);
+      @include transition-delay($page-delay + .5s);
+
+      &:after {
+        @include transition-delay($page-delay + .8s);
+      }
+    }
+
+    /* -> page 2 summary 需要延迟一点时间 */
+    .summary-section {
+      @include transition-delay($page-delay + .5s);
+    }
+  }
+
+  /* -> 主舞台动画 */
+  .main-stage-2 {
+    .chunk-box-1 {
+      &, &:after {
+        @include transition(all 1s linear $page-delay);
+      }
+    }
+
+    /* 比第一个主面板延迟一点时间 */
+    .chunk-box-2, .chunk-box-3 {
+      &, &:after {
+        @include transition(all .7s linear #{$page-delay + .3s});
+      }
+    }
+
+    .fragment-box-1-1, .fragment-box-3-1 {
+      @include transition(all .5s linear #{$page-delay + 1s});
+    }
+
+    .label {
+      &:before {
+        @include transition(opacity .2s ease-out #{$page-delay + 1s + .5s});
+      }
+
+      &:after {
+        @include transition(height .3s ease-out #{$page-delay + 1s + .5s + .2s});
+      }
+
+      span {
+        @include transition(all .3s linear #{$page-delay + 1s + .5s + .2s + .3s});
+      }
+    }
+  }
+
+  /* page 3 */
+  .summary-box-3 {
+    .summary-title {
+      @include transition-duration(.6s);
+    }
+  }
+
+  /* -> 主舞台动画 */
+  .main-stage-3 {
+    .chunk-box-1, .chunk-1, .layer-1 {
+      @include transition(all .3s linear $page-delay);
+    }
+
+    .layer-1 {
+      @include transition-duration(.4s);
+      @include transition-delay($page-delay + .2s);
+    }
+
+    .chunk-1 {
+      @include transition-duration(.6s);
+      @include transition-delay($page-delay + .2s +.3s);
+    }
+
+    .fragment-box {
+      &, &:after {
+        @include transition(all .8s ease-out #{$page-delay + .2s +.3s + .4s + .4s});
+      }
+    }
+
+    .fragment-box-3-2 {
+      &, &:after {
+        @include transition-delay($page-delay + .2s +.3s + .4s + .4s + .3s);
+      }
+    }
+
+    .fragment-box-3-3 {
+      &, &:after {
+        @include transition-delay($page-delay + .2s +.3s + .4s + .4s + .3s + .2s);
+      }
+    }
+  }
+}
+
+/************** end ***************/

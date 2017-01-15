@@ -1,0 +1,185 @@
+/* -> 页面当前状态 */
+.page-current {
+
+  /* -> 设置 summary-title, summary-section动画 */
+  .summary {
+    opacity: 0;
+  }
+
+  .summary-box-1, .summary-box-3 {
+    .summary-title, .summary-section {
+      @include transform(translateX(-100%));
+    }
+  }
+
+  .summary-title {
+    /* -> 设置标题下的横杠动画 */
+    &:after {
+      opacity: 0;
+    }
+  }
+
+  /* page 1 */
+  .summary-box-1 {
+    .digit-box {
+      & > li {
+        opacity: 0;
+        @include transform(translateY(-100%));
+      }
+    }
+  }
+
+  /* ->主舞台动画 */
+  .main-stage-1 {
+    opacity: .2;
+
+    .chunk-1 {
+      @include transform(translateX(-108px));
+    }
+    .chunk-2 {
+      @include transform(translateX(108px));
+    }
+  }
+
+  /* page 2 */
+  .summary-box-2 {
+    .summary-title, .summary-section {
+      width: auto;
+      @include transform(translate(100%));
+    }
+  }
+
+  /* -> 主舞台动画 */
+  .main-stage-2 {
+    .chunk-box {
+      @include transform(translate(0));
+
+      &:after {
+        @include box-shadow((-50px 50px 80px -5px #{$box-shadow-color}, 0px 0px 80px 20px #{$box-shadow-color} inset));
+      }
+    }
+
+    .chunk-box-1 {
+      &:after {
+        @include transform(rotate3d(3.2, 0, -1.6, 75deg) translate(160px, 50px));
+      }
+    }
+
+    .chunk-box-2 {
+      &:after {
+        @include transform(rotate3d(3.2, 0, -1.5, 80deg) translate(45px, 165px));
+      }
+    }
+
+    .chunk-box-3 {
+      &:after {
+        @include transform(rotate3d(3.2, 0, -1.5, 80deg) translate(20px, 130px));
+      }
+    }
+
+    // #issue 滚动时，阴影在主体之上
+    .chunk {
+      will-change: transform;
+      @include transform(translateZ(0));
+    }
+
+    .fragment-box-1-1 {
+      opacity: 0;
+      @include transform(translate(75px, 45px));
+
+      &:after {
+        opacity: .6;
+        @include transform(rotateZ(-27deg)skewX(30deg));
+        @include box-shadow(36px 33px 35px 40px #{$box-shadow-color});
+      }
+    }
+
+    .fragment-box-3-1 {
+      opacity: 0;
+      @include transform(translate(65px, 45px) scale(.4));
+
+      &:after {
+        opacity: .8;
+        @include transform(rotateZ(-60deg) skewX(45deg));
+        @include box-shadow(40px 25px 15px 15px #{$box-shadow-color});
+      }
+    }
+
+    .label {
+      &:before {
+        opacity: 0;
+      }
+
+      &:after {
+        height: 0;
+      }
+
+      span {
+        opacity: 0;
+      }
+    }
+
+    .label-up {
+      span {
+        @include transform(translateX(-60%));
+      }
+    }
+
+    .label-down {
+      span {
+        @include transform(translateX(-40%));
+      }
+    }
+  }
+
+  /* page 3 */
+
+  /* -> 主舞台动画 */
+  .main-stage-3 {
+
+    .chunk-box-1, .chunk-1, .layer-1 {
+      opacity: 0;
+      @include transform(translateX(100px));
+    }
+
+    .layer-1 {
+      &:before {
+        @include box-shadow(0px 0px 35px -5px #{$box-shadow-color});
+      }
+    }
+
+    .layer-2 {
+      &:before {
+        @include box-shadow(20px 15px 80px -15px #{$box-shadow-color});
+      }
+    }
+
+    .fragment-box {
+      opacity: 0;
+      @include transform(translate(30px, 32px));
+
+      &:after {
+        @include border-radius(40px);
+        @include box-shadow(0 0 20px 10px #{$box-shadow-color});
+      }
+    }
+
+    .fragment-box-3-1 {
+      &:after {
+        @include transform(translate(35px, -15px) scale(.5));
+      }
+    }
+
+    .fragment-box-3-2 {
+      &:after {
+        @include transform(translate(30px, -15px) scale(.5));
+      }
+    }
+
+    .fragment-box-3-3 {
+      &:after {
+        @include transform(translate(0, -15px) scale(.5));
+      }
+    }
+  }
+}
