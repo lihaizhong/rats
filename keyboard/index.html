@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘事件</title>
+</head>
+<body>
+<input type="text" class="keyboard">
+<p class="message"></p>
+<script>
+    /**
+     * 判断当前是否是中文输入法
+     * 首先使用keypress获得特殊值时，输入框的内容
+     * 然后keyup会与keypress时获得的值进行比较
+     * 如果相同，说明不是中文输入法
+     */
+    (function () {
+        var $$keyboard = document.querySelector('.keyboard'),
+            value;
+
+        $$keyboard.onkeydown = function (e) {
+            if (e.keyCode === 13) {
+                value = this.value;
+            }
+        }
+
+        $$keyboard.onkeyup = function (e) {
+            if (e.keyCode === 13 && value === this.value) {
+                document.querySelector('.message').innerText = value;
+            }
+        }
+    })();
+</script>
+</body>
+</html>
