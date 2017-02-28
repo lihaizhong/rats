@@ -1,0 +1,24 @@
+{
+  "name": "rats",
+  "version": "1.0.0",
+  "description": "## 知识点",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lihaizhong/rats.git"
+  },
+  "author": "sky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lihaizhong/rats/issues"
+  },
+  "homepage": "https://github.com/lihaizhong/rats#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-postcss": "^6.3.0"
+  }
+}
