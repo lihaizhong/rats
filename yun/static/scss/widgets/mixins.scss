@@ -1,0 +1,64 @@
+/**** #混合宏 ****/
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin transform($prop) {
+  -webkit-transform: $prop;
+  transform: $prop;
+}
+
+@mixin transition($prop) {
+  -webkit-transition: $prop;
+  transition: $prop;
+}
+
+@mixin transition-duration($prop) {
+  -webkit-transition-duration: $prop;
+  transition-duration: $prop;
+}
+
+@mixin transition-delay($prop) {
+  -webkit-transition-delay: $prop;
+  transition-delay: $prop;
+}
+
+@mixin animation($prop) {
+  -webkit-animation: $prop;
+  animation: $prop;
+}
+
+@mixin box-sizing($prop) {
+  -webkit-box-sizing: $prop;
+  box-sizing: $prop;
+}
+
+@mixin box-shadow($prop) {
+  -webkit-box-shadow: $prop;
+  box-shadow: $prop;
+}
+
+@mixin flex($prop) {
+  -webkit-flex: $prop;
+  flex: $prop;
+}
+
+@mixin flex-wrap($prop) {
+  -webkit-flex-wrap: $prop;
+  flex-wrap: $prop;
+}
+
+@mixin justify-content($prop) {
+  -webkit-justify-content: $prop;
+  justify-content: $prop;
+}
+
+@mixin border-radius($prop) {
+  -webkit-border-radius: $prop;
+  border-radius: $prop;
+}

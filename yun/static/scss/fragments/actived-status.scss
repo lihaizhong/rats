@@ -1,0 +1,108 @@
+/* -> 页面活动状态 */
+.page-active {
+
+  /* -> 设置 summary-title, summary-section动画 */
+  .summary {
+    opacity: 1;
+  }
+
+  .summary-box {
+    .summary-title, .summary-section {
+      @include transform(translateX(0));
+    }
+  }
+
+  .summary-title {
+    /* -> 设置标题下的横杠动画 */
+    &:after {
+      opacity: 1;
+    }
+  }
+
+  /* page 1 */
+  .summary-box-1 {
+
+    /* -> 由于summary 完成需要1s，所以这里需要延迟至少1s */
+    .digit-box {
+      & > li {
+        opacity: 1;
+        @include transform(translateY(0));
+      }
+    }
+  }
+
+  /* ->主舞台动画 */
+  .main-stage-1 {
+    opacity: 1;
+
+    .chunk-1, .chunk-2 {
+      @include transform(translateX(0));
+    }
+  }
+
+  /* page 2 */
+
+  /* -> 主舞台动画 */
+  .main-stage-2 {
+    .chunk-box {
+      @include transform(translateY(-20px));
+
+      &:after {
+        @include box-shadow((-80px 80px 70px 30px #{$box-shadow-color}, 0px 0px 80px 20px #{$box-shadow-color} inset));
+      }
+    }
+
+    .fragment-box-1-1, .fragment-box-3-1 {
+      opacity: 1;
+      @include transform(translate(0, 0));
+    }
+
+    .label {
+      &:before {
+        opacity: 1;
+      }
+
+      &:after {
+        height: 45px;
+      }
+
+      span {
+        opacity: 1;
+        @include transform(translateX(-50%));
+      }
+    }
+  }
+
+  /* page 3 */
+
+  /* -> 主舞台动画 */
+  .main-stage-3 {
+    .chunk-box-1, .chunk-1, .layer-1 {
+      opacity: 1;
+      @include transform(translateX(0));
+    }
+
+    .fragment-box {
+      opacity: 1;
+      @include transform(translate(0, 0));
+
+      &:after {
+        @include transform(translate(60px, 15px) scale(1));
+      }
+    }
+
+    .fragment-box-3-2 {
+
+      &:after {
+        @include transform(translate(30px, 15px) scale(1));
+      }
+    }
+
+    .fragment-box-3-3 {
+
+      &:after {
+        @include transform(translate(-13px, 15px) scale(1));
+      }
+    }
+  }
+}
