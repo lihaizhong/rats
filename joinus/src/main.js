@@ -2,7 +2,7 @@
  * Created by sky on 2017/4/10.
  */
 
-const html = require('./views/index.html');
+// const html = require('./views/index.html');
 const css = require('./scss/index.scss');
 
 window.onload = function () {
