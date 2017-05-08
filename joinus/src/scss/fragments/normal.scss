@@ -5,7 +5,19 @@
  */
 
 /* -> 底部心跳 */
-@include keyframes(down) {
+@-webkit-keyframes down {
+  0% {
+    -webkit-transform: translate(-50%, -20px);
+  }
+  50% {
+    -webkit-transform: translate(-50%, 0);
+  }
+  100% {
+    -webkit-transform: translate(-50%, -20px);
+  }
+}
+
+@keyframes down {
   0% {
     transform: translate(-50%, -20px);
   }
@@ -15,7 +27,7 @@
   100% {
     transform: translate(-50%, -20px);
   }
-};
+}
 
 /****************** end ******************/
 
