@@ -2,9 +2,18 @@
  * Created by sky on 2017/4/10.
  */
 
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+
+const webpack = require('webpack')
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const autoprefixer = require('autoprefixer')
+
+const STATIC_PATH = 'static'
+const IMAGE_PATH = STATIC_PATH + '/img'
+const CSS_PATH = STATIC_PATH + '/css'
+const JS_PATH = STATIC_PATH + '/js'
 
 module.exports = {
     devtool: 'cheap-source-map',
@@ -18,34 +27,35 @@ module.exports = {
 
     module: {
         rules: [
+            // image
             {
                 test: /\.(png|jpeg|jpg)$/,
                 use: [
                     {
                         loader: 'url-loader',
                         options: {
-                            limit: 10000
+                            limit: 10000,
+                            name: IMAGE_PATH + '/[name]-[hash:8].[ext]'
                         }
                     }
                 ]
             },
+            // sass
             {
                 test: /\.scss$/,
-                use: [
-                    {
-                        loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader'
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            includePaths: ['src/scss'],
-                            sourceMap: true
+                use: ExtractTextWebpackPlugin.extract({
+                    use: [
+                        'css-loader',
+                        'postcss-loader',
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                includePaths: ['src/scss']
+                            }
                         }
-                    }
-                ]
+                    ],
+                    fallback: 'style-loader'
+                })
             },
             {
                 test: /\.html$/,
@@ -60,14 +70,21 @@ module.exports = {
             sourceMap: true
         }),
         new HtmlWebpackPlugin({
-            title: '动画推广页',
             filename: 'index.html',
-            template: 'src/views/index.html',
-            minify: {
-                minifyCSS: true,
-                minifyJS: true
+            template: 'src/views/index.html'
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            options: {
+                postcss: [
+                    autoprefixer({
+                        remove: true,
+                        browsers: ['> 1% in CN']
+                    })
+                ]
             }
         }),
-        new webpack.HotModuleReplacementPlugin()
+        new ExtractTextWebpackPlugin(CSS_PATH + '/[name]-[chunkhash:8].css'),
+        // new webpack.HotModuleReplacementPlugin()
     ]
 };
