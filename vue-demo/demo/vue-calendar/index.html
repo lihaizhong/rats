@@ -25,6 +25,12 @@
             list-style: none;
         }
 
+        .v-calendar-wrap button {
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
         .v-calendar-wrap {
             position: absolute;
             position: fixed;
@@ -32,7 +38,7 @@
             right: 0;
             bottom: 0;
             left: 0;
-            font-size: 20px;
+            font: 20px/1 "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
         }
 
         .v-calendar-mask {
@@ -104,8 +110,10 @@
 
         .v-calendar-wheel {
             position: relative;
+            flex: 1;
             min-width: 55px;
             padding: 0.5em;
+            text-align: center;
             overflow: hidden;
         }
 
@@ -164,6 +172,12 @@
 
         .v-calendar-wheel-select-bg {
             color: #666;
+        }
+
+        .v-calendar-wheel-option,
+        .v-calendar-wheel-option-bg {
+            height: 30px;
+            line-height: 30px;
         }
     </style>
 </head>
