@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日历</title>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <style>
+        /* base style */
+        .v-calendar-wrap ul,
+        .v-calendar-wrap li,
+        .v-calendar-wrap button,
+        .v-calendar-wrap h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .v-calendar-wrap ul {
+            list-style: none;
+        }
+
+        .v-calendar-wrap {
+            position: absolute;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            font-size: 20px;
+        }
+
+        .v-calendar-mask {
+            height: 100%;
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .v-calendar-entity {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 40%;
+            background: #fff;
+        }
+
+        .v-calendar-head {
+            height: 2em;
+            line-height: 2em;
+            overflow: hidden;
+        }
+
+        .v-calendar-main {
+            flex: 1;
+            padding: 3%;
+            color: #333;
+            background: #fcfcfc;
+            overflow: hidden;
+        }
+
+        .v-calendar-cancel-btn,
+        .v-calendar-restore-btn,
+        .v-calendar-confirm-btn {
+            line-height: 2em;
+            padding: 0 0.5em !important;
+            font-size: 1em;
+        }
+
+        .v-calendar-confirm-btn,
+        .v-calendar-restore-btn {
+            float: right;
+            color: RGB(59, 159, 239);
+        }
+
+        .v-calendar-cancel-btn {
+            float: left;
+            color: RGB(229, 35, 47);
+        }
+
+        .v-calendar-wheel-content {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .v-calendar-wheel-select-area {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            border-top: 1px solid #d5d5d5;
+            border-bottom: 1px solid #d5d5d5;
+        }
+
+        .v-calendar-wheel {
+            position: relative;
+            min-width: 55px;
+            padding: 0.5em;
+            overflow: hidden;
+        }
+
+        .v-calendar-wheel-control,
+        .v-calendar-wheel-mask {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .v-calendar-wheel-control {
+            z-index: 10;
+        }
+
+        .v-calendar-wheel-mask {
+            z-index: 3;
+            background: linear-gradient(to bottom, #fcfcfc, transparent 48%, transparent 52%, #fcfcfc);
+        }
+
+        .v-calendar-wheel-inner,
+        .v-calendar-wheel-inner-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: 0.5em;
+            overflow: hidden;
+        }
+
+        .v-calendar-wheel-inner {
+            z-index: 5;
+        }
+
+        .v-calendar-wheel-inner-bg {
+            z-index: 1;
+        }
+
+        .v-calendar-wheel-select-bg,
+        .v-calendar-wheel-select {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            font-size: 1.1em;
+        }
+
+        .v-calendar-wheel-select {
+            perspective: 1200px;
+            color: #000;
+            height: 1.3em;
+            overflow: hidden;
+        }
+
+        .v-calendar-wheel-select-bg {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <input type="text" v-model="date" @focus="openCalendar" readonly>
+    <v-calendar
+            :show="show"
+            format="YYYY年MM月DD日"
+            :range="[2014, 2018]"
+            @export="exportDate"
+            @close="closeCalendar"></v-calendar>
+</div>
+
+<script type="text/x-template" id="calendarWheel">
+    <div class="v-calendar-wheel">
+        <v-touch tag="div" class="v-calendar-wheel-control" @panup="select" @pandown="select"></v-touch>
+        <div class="v-calendar-wheel-inner">
+            <div class="v-calendar-wheel-select">
+                <ul class="v-calendar-wheel-options" ref="options" :style="wheelStyle">
+                    <li class="v-calendar-wheel-option" v-for="item in items"><span>{{ item }}</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="v-calendar-wheel-mask" v-pre></div>
+        <div class="v-calendar-wheel-inner-bg">
+            <div class="v-calendar-wheel-select-bg">
+                <ul class="v-calendar-options-bg" :style="wheelStyle">
+                    <li class="v-calendar-wheel-option-bg" v-for="item in items"><span>{{ item }}</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-template" id="calendar">
+    <transition name="v-calendar">
+        <section v-if="show" class="v-calendar-wrap">
+            <v-touch tag="div" class="v-calendar-mask" @tap="close"></v-touch>
+            <div class="v-calendar-entity">
+                <header class="v-calendar-head">
+                    <v-touch tag="button" class="v-calendar-cancel-btn" @tap="cancel">取消</v-touch>
+                    <v-touch tag="button" class="v-calendar-confirm-btn" @tap="confirm">确认</v-touch>
+                    <v-touch tag="button" class="v-calendar-restore-btn" @tap="restore">重置</v-touch>
+                </header>
+                <main class="v-calendar-main">
+                    <div class="v-calendar-wheel-content">
+                        <div class="v-calendar-wheel-select-area" v-pre></div>
+                        <v-calendar-wheel :items="yearItems" :selected-item="year" @change="changeYear"></v-calendar-wheel>
+                        <v-calendar-wheel :items="monthItems" :selected-item="month" @change="changeMonth"></v-calendar-wheel>
+                        <v-calendar-wheel :items="dateItems" :selected-item="date" @change="changeDate"></v-calendar-wheel>
+                    </div>
+                </main>
+            </div>
+        </section>
+    </transition>
+</script>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="http://unpkg.com/hammerjs/hammer.min.js"></script>
+<script src="https://unpkg.com/vue-touch@next/dist/vue-touch.min.js"></script>
+<script src="index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            show: false,
+            date: ''
+        },
+        methods: {
+            openCalendar: function () {
+                this.show = true;
+            },
+            exportDate: function (date) {
+                this.date = date;
+            },
+            closeCalendar: function () {
+                this.show = false;
+            }
+        }
+    })
+</script>
+</body>
+</html>

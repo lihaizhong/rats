@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app" v-cloak>
+    <span>{{ msg | capitalize }}</span>
+</div>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        msg: 'capitalize'
+    },
+    filters: {
+        capitalize: function (value) {
+            if (!value) return;
+
+            value = value.toString();
+            return value.charAt(0).toUpperCase() + value.slice(1);
+        }
+    }
+})
+</script>
+</body>
+</html>

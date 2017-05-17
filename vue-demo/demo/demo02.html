@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+</head>
+<body>
+<div id="app">
+    <ol>
+        <todo-item v-for="item in groceryList" :todo="item" key="item.key"></todo-item>
+    </ol>
+</div>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+
+    Vue.component('todo-item', {
+        template: '<li>{{ todo.text }}</li>',
+        props: ['todo']
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+            groceryList: [
+                { text: '蔬菜', key: 1 },
+                { text: '奶酪', key: 2 },
+                { text: '随便其他什么人吃的东西', key: 3 }
+            ]
+        }
+    })
+
+</script>
+</body>
+</html>

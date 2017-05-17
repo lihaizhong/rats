@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理器</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- 事件修饰符 -->
+    <ul>
+        <li>.stop</li>
+        <li>.prevent</li>
+        <li>.capture</li>
+        <li>.self</li>
+        <!-- .once 可以用在自定义组件上 -->
+        <li>.once</li>
+    </ul>
+    <button @click.prevent="warn('表单不能提交', $event)"></button>
+
+    <!-- 键盘修饰符keyup -->
+    <!-- config.keyCodes 可以自定义键盘修饰符别名 -->
+    <ul>
+        <li>.enter</li>
+        <li>.tab</li>
+        <li>.delete(`删除`或者`退格`)</li>
+        <li>.esc</li>
+        <li>.space</li>
+        <li>.up</li>
+        <li>.down</li>
+        <li>.left</li>
+        <li>.right</li>
+    </ul>
+
+    <ul>
+        <li>.ctrl</li>
+        <li>.alt</li>
+        <li>.shift</li>
+        <li>.meta</li>
+    </ul>
+</div>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        methods: {
+            warn: function (msg, event) {
+                if (event) event.stopPropagation();
+                alert(msg);
+            }
+        }
+    })
+
+
+</script>
+
+</body>
+</html>

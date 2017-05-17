@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+</head>
+<body>
+
+<div id="app">
+    <global-component></global-component>
+    <local-component :msg="msg"></local-component>
+    <table>
+        <tr is="local-component"></tr>
+    </table>
+    <div>
+        <simple-counter init-counter="1"></simple-counter>
+        <simple-counter init-counter="4"></simple-counter>
+        <simple-counter></simple-counter>
+    </div>
+
+    <!-- 组件通信：props down, event up -->
+    <div>
+        <input type="text" v-model="parentMsg">
+        <child message="Hello Vue!" :my-message="parentMsg"></child>
+    </div>
+
+    <div>
+        <p>{{ total }}</p>
+        <button-counter @increment="incrementTotal"></button-counter>
+        <button-counter @increment="incrementTotal" @click.native="nativeClick"></button-counter>
+    </div>
+
+    <div>
+        <p>{{ bar }}</p>
+        <sync-component :foo.sync="bar"></sync-component>
+    </div>
+
+    <div>
+        <currency-input v-model="price"></currency-input>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+    Vue.component('global-component', {
+        template: '<p>这是一个全局自定义组件</p>'
+    })
+
+    Vue.component('simple-counter', {
+        template: '<button @click="counter++">{{ counter }}</button>',
+        props: ['initCounter'],
+        data: function () {
+            return {
+                counter: isNaN(this.initCounter) ? 0 : this.initCounter
+            }
+        }
+    })
+
+    Vue.component('child', {
+        props: ['message', 'myMessage'],
+        template: '<p>{{ message }} {{ myMessage }}</p>'
+    })
+
+    var Child = {
+        template: '<p>{{ outerMsg }}</p>',
+        props: ['msg'],
+        computed: {
+            outerMsg: function () {
+                var msg = this.msg || '这是一个局部自定义组件';
+                return msg.split('').reverse().join('');
+            }
+        }
+    }
+
+    /**
+     * type:
+     *  String
+     *  Number
+     *  Boolean
+     *  Function
+     *  Object
+     *  Array
+     */
+    Vue.component('prop-component', {
+        props: {
+            prop1: String,
+            prop2: [String, Number],
+            prop3: {
+                type: String,
+                require: true
+            },
+            prop4: {
+                type: Number,
+                default: 100
+            },
+            prop5: {
+                type: Object,
+                default: function () {
+                    return {message: 'hello'}
+                }
+            },
+            prop6: {
+                vaildtor: function (value) {
+                    return value > 10;
+                }
+            }
+        }
+    })
+
+    Vue.component('button-counter', {
+        template: '<button @click="increment">{{ counter }}</button>',
+        data: function () {
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            increment: function () {
+                this.counter++;
+                this.$emit('increment');
+            }
+        }
+    })
+    
+    Vue.component('sync-component', {
+        template: '<div><p>{{ foo }}</p><button @click="updateFoo">更新父级参数</button></div>',
+        props: ['foo'],
+        methods: {
+            updateFoo: function () {
+                this.$emit('update:foo', Math.floor(Math.random()*10));
+            }
+        }
+    })
+
+    Vue.component('currency-input', {
+        template: '<span>$<input type="text" ref="input" :value="value" @input="updateValue($event.target.value)"></span>',
+        props: ['value'],
+        methods: {
+            updateValue: function (value) {
+                var index = value.indexOf('.'),
+                    formatedValue = value.trim().slice(0, index === -1 ? index : index + 3);
+
+                if (formatedValue !== value) {
+                    this.$refs.input.value = formatedValue;
+                }
+
+                this.$emit('input', Number(formatedValue));
+            }
+        }
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+            parentMsg: 'My name is sky.',
+            msg: '这是一个局部自定义组件，但信息是外部传入的',
+            total: 0,
+            bar: 3,
+            price: '0.00'
+        },
+        components: {
+            'local-component': Child
+        },
+        methods: {
+            incrementTotal: function () {
+                this.total++;
+            },
+            nativeClick: function () {
+                alert('这是一个弹窗')
+            }
+        }
+    })
+</script>
+</body>
+</html>

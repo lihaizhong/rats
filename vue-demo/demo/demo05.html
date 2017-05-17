@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class与Style绑定</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- 绑定Class -->
+    <div :class="{active: isActive}">1111</div>
+    <div class="static" :class="{active: isActive, 'text-danger': hasError}">2222</div>
+    <div :class="classObject">3333</div>
+    <div :class="computedClassObject">4444</div>
+    <div :class="[activeClass, errorClass]">5555</div>
+    <div :class="[isActive ? activeClass : '', errorClass]">6666</div>
+    <div :class="[{active: isActive}, errorClass]">7777</div>
+    <my-component class="baz boo" :class="{active: isActive}"></my-component>
+    <!-- 绑定内联样式 -->
+    <div :style="{color: activeColor, fontSize: fontSize + 'px'}">8888</div>
+    <div :style="[baseStyles, overridingStyles]">9999</div>
+    <!-- 自动添加前缀 -->
+    <div :style="prefixStyles">0000</div>
+</div>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+Vue.component('my-component', {
+    template: '<p class="foo bar">Hi</p>'
+})
+
+new Vue({
+    el: '#app',
+    data: {
+        // class
+        isActive: true,
+        hasError: false,
+        activeClass: 'active',
+        errorClass: 'text-danger',
+        classObject: {
+            active: true,
+            'text-danger': false
+        },
+        error: null,
+        // style
+        activeColor: 'red',
+        fontSize: 30,
+        baseStyles: {
+            color: 'yellow',
+            fontSize: '15px'
+        },
+        overridingStyles: {
+            backgroud: 'red',
+            fontSize: '40px'
+        },
+        prefixStyles: {
+            transform: 'translateX(30px)'
+        }
+    },
+    computed: {
+        computedClassObject: function () {
+            return {
+                active: this.isActive && !this.error,
+                'text-danger': this.error && this.error.type === 'fatal'
+            }
+        }
+    }
+})
+</script>
+</body>
+</html>
