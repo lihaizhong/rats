@@ -1,31 +1,25 @@
-<style scoped>
+<style lang="sass" scoped>
     
 </style>
 
-<template>
-    <v-translate>
-        <section class="v-calendar-wrap">
-            <v-touch tag="div" class="v-calendar-mask"></v-touch>
-            <section class="v-calendar-modal">
-                <header class="v-calendar-head">
-                    <v-touch tag="button" class="v-calendar-btn" @tap="button"></v-touch>
-                    <v-touch tag="button" class="v-calendar-btn"></v-touch>
-                    <v-touch tag="button" class="v-calendar-btn"></v-touch>
-                </header>
-                <main class="v-calendar-main">
-                    <div class="v-calendar-content">
-                        <div class="v-calendar-area"></div>
-                        <v-wheel :items="yearItems" selected-item="year" @change="changeYear"></v-wheel>
-                        <v-wheel :items="monthItems" selected-item="month" @change="changeMonth"></v-wheel>
-                        <v-wheel :items="dateItems" selected-item="date" @change="changeDate"></v-wheel>
-                    </div>
-                </main>
-            </section>
-        </section>
-    </v-translate>
+<template lang="jade">
+    v-translate
+        section.v-calender-wrap
+            v-touch.v-calender-mask(tag="div")
+            section.v-calendar-modal
+                header.v-calendar-head
+                    v-touch.v-calendar-btn(tag="button", @tap="cancel")
+                    v-touch.v-calendar-btn(tag="button", @tap="confirm")
+                    v-touch.v-calendar-btn(tag="button", @tap="confirm")
+                main.v-calendar-main
+                    div.v-calendar-content
+                        div.v-calendar-area
+                        v-wheel(:items="yearItems", selected-item="year", @change="changeYear")
+                        v-wheel(:items="monthItems", selected-item="month", @change="changeMonth")
+                        v-wheel(:items="dateItems", selected-item="date", @change="changeDate")
 </template>
 
-<script lang="babel">
+<script lang="babel" type="text/ecmascript-6">
     import vueTouch from 'vue-touch';
 
     import wheel from './wheel.vue';
@@ -33,7 +27,7 @@
     Vue.use(vueTouch);
     
     export default {
-        data: function () {
+        data () {
 
             let yearItems = [];
             let now = new Date(this.defaultDate);
@@ -88,7 +82,9 @@
         props: {
             range: {
                 type: Array,
-                default: [1970, new Date().getFullYear()],
+                default: () => {
+                    return [1970, new Date().getFullYear()];
+                }
             },
             deafultDate: {
                 type: Number,
@@ -103,12 +99,12 @@
                 default: false
             }
         },
-        created: function () {
+        created () {
 
             this.getDateItems(this.year, this.month);
         },
         methods: {
-            getDateItems: function (year, month) {
+            getDateItems (year, month) {
 
                 let specialDateItems = [];
 
@@ -127,19 +123,19 @@
 
                 this.dateItems = [...this.baseDateItems, ...specialDateItems];
             },
-            setYear: function (year) {
+            setYear (year) {
 
                 this.year = year;
             },
-            setMonth: function (month) {
+            setMonth (month) {
 
                 this.month = month;
             },
-            setDate: function (date) {
+            setDate (date) {
 
                 this.date = date;
             },
-            confirm: function () {
+            confirm () {
 
                 let map = {
                     'y': this.year,
@@ -147,16 +143,14 @@
                     'd': this.date
                 }
 
-                let exportDate = this.format.replace(/[yMd]+/g, function (match) {
+                let exportDate = this.format.replace(/[yMd]+/g, (match) => {
                     let seed = match[0];
                     let value;
 
                     if (seed === 'y') {
 
                         value = '' + map.y;
-                        value = match.length === 2 ?
-                                value.substr(value.length - 2) :
-                                value.substr(value.length - 4)
+                        value = value.substr(value.length - match.length);
                     } else {
 
                         value = '0' + map[seed];
@@ -164,16 +158,16 @@
                     }
 
                     return value;
-                }.bind(this));
+                });
 
                 this.$emit('export', exportDate);
                 this.close();
             },
-            restore: function () {
+            restore () {
 
                 this.$emit('export', '');
             },
-            close: function () {
+            close () {
 
                 this.$emit('update:show', false);
             }

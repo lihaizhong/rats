@@ -1,9 +1,10 @@
 # Created by .ignore support plugin (hsz.mobi)
 /.idea/
+/.vscode/
 
 .DS_Store
 _lib/.DS_Store
 nodejs-demo/node_modules/
+/node_modules/
 webpack-version-2.2/.DS_Store
-/joinus/node_modules/
 /joinus/dist/

@@ -4,7 +4,7 @@
 
 import Vue from 'vue';
 
-import App from './view/App.vue';
+import App from './src/view/App.vue';
 // import vueTouch from 'vue-touch';
 
 // Vue.use(vueTouch);

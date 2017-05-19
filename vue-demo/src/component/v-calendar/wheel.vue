@@ -52,11 +52,9 @@
             if (this.selectedItem) {
                 let index = this.items.indexOf(this.selectedItem);
 
-                if (index === -1) {
-                    index = 0;
+                if (index !== -1) {
+                    this.scrollTop = 0 - this.baseHeight * index;
                 }
-
-                this.scrollTop = 0 - this.baseHeight * index;
             }
         },
         mounted () {
@@ -82,7 +80,34 @@
 
                 this.timer = setTimeout(function () {
 
+                    if (this.scrollTop > this.minScrollTop) {
 
+                        this.scrollTop = this.minScrollTop;
+                    } else if (this.scrollTop < this.maxScrollTop) {
+
+                        this.scrollTop = this.maxScrollTop + this.baseHeight;
+                    } else {
+
+                        let mod = this.scrollTop % this.baseHeight;
+
+                        if (mod !== 0) {
+
+                            let half = base / 2;
+                            if (mod > half) {
+
+                                this.scrollTop -= (mod - base);
+                            } else {
+
+                                this.scrollTop -= mod;
+                            }
+                        }
+                    }
+
+                    index = 0 - this.scrollTop / this.baseHeight;
+                    let item = this.items[index];
+
+                    this.timer = null;
+                    this.$emit('change', item);
                 }.bind(this), this.delay);
             }
         }

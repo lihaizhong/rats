@@ -23,12 +23,14 @@
 
         .v-calendar-wrap ul {
             list-style: none;
+            -webkit-appearance: none;
         }
 
         .v-calendar-wrap button {
             background: transparent;
             border: none;
             outline: none;
+            -webkit-appearance: none;
         }
 
         .v-calendar-wrap {
@@ -186,11 +188,10 @@
 <div id="app">
     <input type="text" v-model="date" @focus="openCalendar" readonly>
     <v-calendar
-            :show="show"
-            format="YYYY年MM月DD日"
+            :show.sync="show"
+            format="yyyy年MM月dd日"
             :range="[2014, 2018]"
-            @export="exportDate"
-            @close="closeCalendar"></v-calendar>
+            @export="exportDate"></v-calendar>
 </div>
 
 <script type="text/x-template" id="calendarWheel">
@@ -255,9 +256,6 @@
             },
             exportDate: function (date) {
                 this.date = date;
-            },
-            closeCalendar: function () {
-                this.show = false;
             }
         }
     })

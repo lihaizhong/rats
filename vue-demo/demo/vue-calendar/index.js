@@ -19,6 +19,7 @@ var calendarWheel = {
             offsetY: offsetY,
             minOffsetY: 0,
             maxOffsetY: 0,
+            height: itemHeight,
             timer: null
         }
     },
@@ -44,8 +45,8 @@ var calendarWheel = {
         }
     },
     watch: {
-        offsetY: function () {
-            this.style['transform'] = 'translate3d(0, ' + this.offsetY + 'px, 0)';
+        offsetY: function (nv) {
+            this.style['transform'] = 'translate3d(0, ' + nv + 'px, 0)';
         }
     },
     methods: {
@@ -68,7 +69,7 @@ var calendarWheel = {
 
             this.timer = setTimeout(function () {
 
-                var base = 30, half, mod, item, index;
+                var base = this.height, half, mod, item, index;
 
                 // 微调offsetY
                 if (this.offsetY > this.minOffsetY) {
@@ -82,20 +83,22 @@ var calendarWheel = {
                     half = base / 2;
                     mod = this.offsetY % base;
 
-                    if (mod > half) {
+                    if (mod !== 0) {
+                        if (mod > half) {
 
-                        this.offsetY = this.offsetY - mod + base;
-                    } else if (mod < half) {
+                            this.offsetY -= (mod - base);
+                        } else {
 
-                        this.offsetY = this.offsetY - mod;
+                            this.offsetY -= mod;
+                        }
                     }
                 }
 
                 // 获取item值
-                index = -this.offsetY / 30;
+                index = -this.offsetY / base;
                 item = this.items[index];
 
-                timer = null;
+                this.timer = null;
                 this.$emit('change', item);
             }.bind(this), 200);
         }
@@ -165,7 +168,7 @@ Vue.component('v-calendar', {
         },
         format: {
             type: String,
-            default: 'YYYY-MM-DD'
+            default: 'yyyy-MM-dd'
         },
         show: {
             type: Boolean,
@@ -180,13 +183,12 @@ Vue.component('v-calendar', {
         // 根据年份和月份，处理日期
         this.getDateItemsByMonth(this.year, this.month);
     },
-    computed: {
-        checkFormat: function () {
-            if (!/^(?:Y{2}|Y{4})\S+M{1,2}\S+D{1,2}\S*$/.test(this.format)) {
-                throw new Error('format属性格式有误，请传入正确格式！例如：YYYY-MM-DD');
-            }
+    watch: {
+        format: function (nv) {
 
-            return this.format;
+            if (!/^(?:y{2}|Y{4})\S+M{1,2}\S+d{1,2}\S*$/.test(nv)) {
+                throw new Error('format属性格式有误，请传入正确格式！例如：YYYY年MM月DD日');
+            }
         }
     },
     methods: {
@@ -212,23 +214,26 @@ Vue.component('v-calendar', {
         },
         confirm: function () {
 
-            var exportDate = this.checkFormat.replace(/([YMD]+)/g, function (match) {
-                var seed = match.substr(0, 1),
-                    value;
+            var map = {
+                y: this.year,
+                M: this.month,
+                d: this.date
+            }
 
-                switch(seed) {
-                    case 'Y':
-                        value = match.length == 2 ? this.year.substr(this.year.length - 3) : this.year;
-                        break;
-                    case 'M':
-                        value = this.month;
-                        break;
-                    case 'D':
-                        value = this.date;
-                        break;
+            var exportDate = this.format.replace(/[yMd]+/g, function (match) {
+                var seed = match[0], value;
+
+                if (seed === 'y') {
+
+                    value = '' + map.y;
+                    value = value.substr(value.length - match.length);
+                } else {
+                    value = '0' + map[seed];
+                    value = value.substr(value.length - 2);
                 }
 
                 return value;
+
             }.bind(this));
 
             this.$emit('export', exportDate);
@@ -243,7 +248,7 @@ Vue.component('v-calendar', {
             this.close();
         },
         close: function () {
-            this.$emit('close');
+            this.$emit('update:show', false);
         },
         changeYear: function (year) {
             this.year = year;
