@@ -1,26 +1,27 @@
-<style scoped>
+<style lang="sass" scoped>
     
 </style>
 
-<template>
-    <section>
-        <input type="text" @focus="openCalendar">
-        <calendar :show.sync="show"></calendar>
-    </section>
+<template lang="pug">
+    section#app
+        input(@focus="openCalendar", :value="date")
+        calendar(:show.sync="show")
 </template>
 
 <script lang="babel">
 
-    import calendar from '../component/v-calendar/calendar.vue';
+    import Calendar from '../component/v-calendar/calendar.vue';
 
     export default {
+        name: 'app',
         data () {
             return {
+                date: '',
                 show: false
             }
         },
         components: {
-            calendar
+            Calendar
         },
         methods: {
             openCalendar () {

@@ -1,38 +1,46 @@
+/**
+ * @author Sky
+ * @email lihaizh_cn@foxmail.com
+ * @create date 2017-05-20 03:14:47
+ * @modify date 2017-05-20 03:14:47
+ * @desc 日历组件
+*/
 <style lang="sass" scoped>
     
 </style>
 
-<template lang="jade">
-    v-translate
-        section.v-calender-wrap
-            v-touch.v-calender-mask(tag="div")
-            section.v-calendar-modal
-                header.v-calendar-head
-                    v-touch.v-calendar-btn(tag="button", @tap="cancel")
-                    v-touch.v-calendar-btn(tag="button", @tap="confirm")
-                    v-touch.v-calendar-btn(tag="button", @tap="confirm")
-                main.v-calendar-main
-                    div.v-calendar-content
-                        div.v-calendar-area
-                        v-wheel(:items="yearItems", selected-item="year", @change="changeYear")
-                        v-wheel(:items="monthItems", selected-item="month", @change="changeMonth")
-                        v-wheel(:items="dateItems", selected-item="date", @change="changeDate")
+<template lang="pug">
+    section.v-calender-wrap(v-show="show")
+        v-touch.v-calender-mask(tag="div")
+        section.v-calendar-modal
+            header.v-calendar-head
+                v-touch.v-calendar-btn(tag="button", @tap="cancel") 取消
+                v-touch.v-calendar-btn(tag="button", @tap="confirm") 确认
+                v-touch.v-calendar-btn(tag="button", @tap="restore") 重置
+            main.v-calendar-main
+                div.v-calendar-content
+                    div.v-calendar-area
+                    wheel(:items="yearItems", selected-item="year", @change="changeYear")
+                    wheel(:items="monthItems", selected-item="month", @change="changeMonth")
+                    wheel(:items="dateItems", selected-item="date", @change="changeDate")
 </template>
 
-<script lang="babel" type="text/ecmascript-6">
+<script lang="babel">
+    import Vue from 'vue';
     import vueTouch from 'vue-touch';
 
-    import wheel from './wheel.vue';
+    import Wheel from './wheel.vue';
 
     Vue.use(vueTouch);
     
     export default {
+        name: 'calendar',
         data () {
 
             let yearItems = [];
             let now = new Date(this.defaultDate);
             let min = new Date(1970);
-            let [minYear, maxYear] = range;
+            let [minYear, maxYear] = this.range;
 
             if (now.getTime() < min) {
                 now = min;
@@ -57,7 +65,7 @@
             } else {
 
                 maxYear = year;
-            }
+        }
 
             for (let y = minYear; y <= maxYear; y++) {
                 yearItems.push(y);
@@ -71,7 +79,7 @@
 
             return {
                 yearItems,
-                monthItems,
+                monthItems: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                 dateItems: [],
                 baseDateItems,
                 year,
@@ -82,7 +90,7 @@
         props: {
             range: {
                 type: Array,
-                default: () => {
+                default: function () {
                     return [1970, new Date().getFullYear()];
                 }
             },
@@ -98,6 +106,9 @@
                 type: Boolean,
                 default: false
             }
+        },
+        components: {
+            Wheel
         },
         created () {
 
@@ -123,15 +134,15 @@
 
                 this.dateItems = [...this.baseDateItems, ...specialDateItems];
             },
-            setYear (year) {
+            changeYear (year) {
 
                 this.year = year;
             },
-            setMonth (month) {
+            changeMonth (month) {
 
                 this.month = month;
             },
-            setDate (date) {
+            changeDate (date) {
 
                 this.date = date;
             },
@@ -166,6 +177,10 @@
             restore () {
 
                 this.$emit('export', '');
+            },
+            cancel () {
+                
+                this.close();
             },
             close () {
 

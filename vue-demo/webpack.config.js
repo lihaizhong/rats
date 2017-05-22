@@ -17,37 +17,45 @@ module.exports = {
     },
     output: {
         path: './dist',
-        filename: '[name][hash:8].js'
+        filename: '[name].[hash:8].js'
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.vue$/,
                 loader: 'vue-loader',
-                options: {
-                    loaders: {
-                        css: ExtractTextPlugin.extract({
-                            use: [
-                                'css-loader',
-                                'sass-loader'
-                            ],
-                            fallback: 'vue-style-loader'
-                        })
-                    }
-                }
+                // options: {
+                //     loaders: {
+                //         css: ExtractTextPlugin.extract({
+                //             use: [
+                //                 'css-loader',
+                //                 'sass-loader'
+                //             ],
+                //             fallback: 'vue-style-loader'
+                //         })
+                //     }
+                // }
+            },
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/
             }
         ]
     },
     resolve: {
-        extensions: ['.js', '.vue', '.json'],
         alias: {
-            'vue$': 'vue/dist/vue.common.js'
+            'vue$': 'vue/dist/vue.esm.js'
         }
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"devlopment"'
+            }
+        }),
         new htmlWebpackPlugins({
             filename: 'index.html',
-            template: 'index.html'
+            template: 'index.template.html'
         }),
         new ExtractTextPlugin('style.css')
     ]

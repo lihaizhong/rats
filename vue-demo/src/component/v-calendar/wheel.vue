@@ -2,25 +2,21 @@
     
 </style>
 
-<template>
-    <section class="v-wheel-wrap">
-        <v-touch tag="div" class="v-wheel-content" @panup="wheel" @pandown="wheel">
-            <ul class="v-wheel-select" ref="options" :style="scrollStyle">
-                <li class="v-wheel-option" v-for="item in items">{{ item }}</li>
-            </ul>
-        </v-touch>
-        <div class="v-wheel-content-shadow">
-            <div class="v-wheel-mask"></div>
-            <ul class="v-wheel-select" :style="scrollStyle">
-                <li class="v-wheel-option" v-for="item in items">{{ item }}</li>
-            </ul>
-        </div>
-    </section>
+<template lang="pug">
+    section.v-wheel-wrap
+        v-touch.v-wheel-content(tag="div", @panup="wheel", @pandown="wheel")
+            ul.v-wheel-select(ref="options", @panup="wheel", @pandown="wheel")
+                li.v-wheel-option(v-for="item in items") {{ item }}
+        .v-wheel-content-shadow
+            .v-wheel-content-mask
+            ul.v-wheel-select(:style="scrollStyle")
+                li.v-wheel-option(v-for="item in items") {{ item }}
 </template>
 
 <script lang="babel">
     
     export default {
+        name: 'wheel',
         data () {
             return {
                 baseHeight: 30,
