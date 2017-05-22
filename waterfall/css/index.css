@@ -1,24 +1,28 @@
 * {
-	list-style: none;
-	padding:0;
-	margin:0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
+
 .main {
-	margin:0 auto;
-	margin-left:calc(100vw - 100%);
-	position:relative;
+    margin: 0 auto;
+    margin-left: calc(100vw - 100%);
+    position: relative;
 }
+
 .box {
-	width:210px;
-	padding:5px;
-	float:left;
+    width: 210px;
+    padding: 5px;
+    float: left;
 }
+
 .pic {
-	width:190px;
-	padding:10px;
-	border-radius:3px;
-	box-shadow: 0 0 6px #666;
+    width: 190px;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 0 0 6px #666;
 }
+
 img {
-	width:100%;
+    width: 100%;
 }

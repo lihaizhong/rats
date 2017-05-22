@@ -99,7 +99,7 @@
                         }
                     }
 
-                    index = 0 - this.scrollTop / this.baseHeight;
+                    let index = 0 - this.scrollTop / this.baseHeight;
                     let item = this.items[index];
 
                     this.timer = null;

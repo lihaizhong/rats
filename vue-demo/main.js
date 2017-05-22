@@ -3,13 +3,11 @@
  */
 
 import Vue from 'vue';
-import vueTouch from 'vue-touch';
+import VueTouch from 'vue-touch';
 
 import App from './src/view/App.vue';
 
-Vue.config.devtools = true;
-
-Vue.use(vueTouch);
+Vue.use(VueTouch);
 
 new Vue({
     el: '#app',

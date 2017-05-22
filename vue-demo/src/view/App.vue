@@ -4,8 +4,8 @@
 
 <template lang="pug">
     section#app
-        input(@focus="openCalendar", :value="date")
-        calendar(:show.sync="show")
+        input(@focus="openCalendar", v-model="date")
+        calendar(:show="show", @export="exportDate", @update:show="val => show = val")
 </template>
 
 <script lang="babel">
@@ -26,6 +26,9 @@
         methods: {
             openCalendar () {
                 this.show = true;
+            },
+            exportDate (date) {
+                this.date = date;
             }
         }
     }

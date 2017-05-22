@@ -10,7 +10,7 @@
 </style>
 
 <template lang="pug">
-    section.v-calender-wrap(v-show="show")
+    section.v-calender-wrap(v-if="show")
         v-touch.v-calender-mask(tag="div")
         section.v-calendar-modal
             header.v-calendar-head
@@ -38,7 +38,7 @@
         data () {
 
             let yearItems = [];
-            let now = new Date(this.defaultDate);
+            let now = this.defaultDate ? new Date(this.defaultDate) : new Date();
             let min = new Date(1970);
             let [minYear, maxYear] = this.range;
 
@@ -65,7 +65,7 @@
             } else {
 
                 maxYear = year;
-        }
+            }
 
             for (let y = minYear; y <= maxYear; y++) {
                 yearItems.push(y);
