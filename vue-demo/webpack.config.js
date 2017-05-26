@@ -10,9 +10,11 @@ const htmlWebpackPlugins = require('html-webpack-plugin')
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
-    devtool: 'cheap-eval-source-map',
+    // devtool: 'cheap-eval-source-map',
+    devtool: false,
     entry: {
         main: path.resolve(__dirname, 'main.js')
     },
@@ -44,11 +46,18 @@ module.exports = {
         ]
     },
     resolve: {
+        
         alias: {
             'vue$': 'vue/dist/vue.esm.js'
         }
     },
     plugins: [
+        new webpack.DllReferencePlugin({
+            manifest: require('./build/vue-core-manifest.json')
+        }),
+        new webpack.DllReferencePlugin({
+            manifest: require('./build/vue-touch-manifest.json')
+        }),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"devlopment"'
@@ -58,9 +67,9 @@ module.exports = {
             filename: 'index.html',
             template: 'index.template.html'
         }),
-        new ExtractTextPlugin('html.txt'),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
+        new BundleAnalyzerPlugin()
     ],
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),

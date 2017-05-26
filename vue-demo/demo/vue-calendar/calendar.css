@@ -1,0 +1,168 @@
+.v-calendar-wrap ul,
+.v-calendar-wrap li,
+.v-calendar-wrap button,
+.v-calendar-wrap h1 {
+    margin: 0;
+    padding: 0;
+}
+
+.v-calendar-wrap ul {
+    list-style: none;
+    -webkit-appearance: none;
+}
+
+.v-calendar-wrap button {
+    background: transparent;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.v-calendar-wrap {
+    position: absolute;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font: 20px/1 "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+.v-calendar-mask {
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.v-calendar-entity {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 40%;
+    background: #fff;
+}
+
+.v-calendar-head {
+    height: 2em;
+    line-height: 2em;
+    overflow: hidden;
+}
+
+.v-calendar-main {
+    flex: 1;
+    padding: 3%;
+    color: #333;
+    background: #fcfcfc;
+    overflow: hidden;
+}
+
+.v-calendar-cancel-btn,
+.v-calendar-restore-btn,
+.v-calendar-confirm-btn {
+    line-height: 2em;
+    padding: 0 0.5em !important;
+    font-size: 1em;
+}
+
+.v-calendar-confirm-btn,
+.v-calendar-restore-btn {
+    float: right;
+    color: RGB(59, 159, 239);
+}
+
+.v-calendar-cancel-btn {
+    float: left;
+    color: RGB(229, 35, 47);
+}
+
+.v-calendar-wheel-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    overflow: hidden;
+}
+
+.v-calendar-wheel-select-area {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    border-top: 1px solid #d5d5d5;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.v-calendar-wheel {
+    position: relative;
+    flex: 1;
+    min-width: 55px;
+    padding: 0.5em;
+    text-align: center;
+    overflow: hidden;
+}
+
+.v-calendar-wheel-control,
+.v-calendar-wheel-mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.v-calendar-wheel-control {
+    z-index: 10;
+}
+
+.v-calendar-wheel-mask {
+    z-index: 3;
+    background: linear-gradient(to bottom, #fcfcfc, transparent 48%, transparent 52%, #fcfcfc);
+}
+
+.v-calendar-wheel-inner,
+.v-calendar-wheel-inner-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0.5em;
+    overflow: hidden;
+}
+
+.v-calendar-wheel-inner {
+    z-index: 5;
+}
+
+.v-calendar-wheel-inner-bg {
+    z-index: 1;
+}
+
+.v-calendar-wheel-select-bg,
+.v-calendar-wheel-select {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    font-size: 1.1em;
+}
+
+.v-calendar-wheel-select {
+    perspective: 1200px;
+    color: #000;
+    height: 1.3em;
+    overflow: hidden;
+}
+
+.v-calendar-wheel-select-bg {
+    color: #666;
+}
+
+.v-calendar-wheel-option,
+.v-calendar-wheel-option-bg {
+    height: 30px;
+    line-height: 30px;
+}

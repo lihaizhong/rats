@@ -90,7 +90,7 @@
         props: {
             range: {
                 type: Array,
-                default: function () {
+                default () {
                     return [1970, new Date().getFullYear()];
                 }
             },
