@@ -1,12 +1,38 @@
 {
-    "root": true,
+  "root": true,
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
     "parser": "babel-eslint",
-    "extends": "vue",
-    "plugins": [
-        "flow-vars"
+    "sourceType": "module",
+    "allowImportExportEverywhere": false
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/recommended"
+  ],
+  "plugins": [
+    "vue",
+    "html"
+  ],
+  "settings": {
+    "html/html-extensions": [
+      ".erb",
+      ".handlebars",
+      ".hbs",
+      ".htm",
+      ".html",
+      ".mustache",
+      ".nunjucks",
+      ".php",
+      ".tag",
+      ".twig",
+      ".we"
     ],
-    "rules":{
-      "flow-vars/define-flow-type": 1,
-      "flow-vars/use-flow-type": 1
-    }
+    "html/indent": "+2"
+  }
 }

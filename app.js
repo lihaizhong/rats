@@ -9,7 +9,7 @@ app.use(router)
 
 
 // app.use(async (ctx, next) => {
-//   console.log('>> one')
+//  console.log('>> one')
 //   await next()
 //   console.log('<< one')
 // })
@@ -30,7 +30,5 @@ app.use(router)
 //   let path = ctx.path
 //   ctx.body = path
 // })
-
-
 
 app.listen(3000)
