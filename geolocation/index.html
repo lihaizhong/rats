@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        var coords = position.coords
+        console.log(coords)
+        // accuracy: 132
+        // altitude: null
+        // altitudeAccuracy: null
+        // heading: null
+        // latitude: 30.281930799999998
+        // longitude: 120.0122113
+        // speed: null
+      }, error => {
+        // error.code
+        //   PERMISSION_DENIED => 用户未授权
+        //   POSITION_UNAVAILABLE => 未获得有效位置信息
+        //   TIMEOUT => 获取位置信息超时
+        // error.message => 开发、调试使用，对用户不友好
+      })
+    }
+  </script>
+</body>
+</html>

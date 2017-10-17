@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>拖放事件</title>
+  <style>
+    img {
+      width: 80px;
+    }
+
+    #drop {
+      height: 80px;
+      background: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="drag" draggable="true">
+    <img draggable="true" src="http://img.tqmall.com/images/goods/2014/09/12/goods_img/24668_P_1410506022629.jpg" alt="">
+    <img draggable="true" src="http://img.tqmall.com/images/201507/goods_img/normal_p_143641199857427987.jpg" alt="">
+  </div>
+  <div id="drop"></div>
+
+  <script>
+    var $$drop = document.getElementById('drop')
+    var $$imgs = document.getElementsByTagName('img')
+
+    var dragIcon = document.createElement('img')
+    dragIcon.width = dragIcon.height = 20
+
+    for (var i = 0, len = $$imgs.length; i < len; i++) {
+      $$imgs[i].ondragstart = function (evt) {
+        dragIcon.src = this.src
+        // 拖动图标
+        evt.dataTransfer.setDragImage(dragIcon, -10, -10)
+      }
+    }
+
+    $$drop.ondrop = function (evt) {
+      this.innerHTML += evt.dataTransfer.getData('text/html')
+    }
+
+    // 必须设置dragover事件，否则drop事件不起作用
+    $$drop.ondragover = function (evt) {
+      return false
+    }
+  </script>
+</body>
+</html>
