@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>算法1</title>
+</head>
+<body>
+  <h1>一个数组中，有n个元素，取出参数和等于m的值</h1>
+  <div>
+    <input type="text" id="m">
+    <ul id="process"></ul>
+  </div>
+
+  <script>
+    (() => {
+      let list = [1, 5, {a: 2}, 2389, 38, {b: 5}, 37, -538, 37, [38, 29], -92, 49, -39, 58, 'dfj', -8, 2, 4, 84, '23']
+      let collection = []
+      let m = 100
+
+      if (list.includes(m)) {
+        return true
+      }
+
+      let sortList = Math.sort((a, b) => {
+        return Number(a) - Number(b)
+      })
+
+      function calculate () {
+        let isValidValue = false
+        let item
+
+        do {
+          item = sortList.shift()
+          isValidValue = isNaN(item)
+        } while (isValidValue)
+
+        collection.push(item)
+      }
+    })
+  </script>
+</body>
+</html>
