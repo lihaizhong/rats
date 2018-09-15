@@ -4,14 +4,14 @@
 
 ## 记录
 
-###  SASS 使用
+### SASS 使用
 
 >     Usage: sass [options] [INPUT] [OUTPUT]
 
-```
+```text
 Description:
   Converts SCSS or Sass files to CSS.
-      
+
 Common Options:
   -I, --load-path PATH             Specify a Sass import path.
   -r, --require LIB                Require a Ruby library before running Sass.
@@ -19,13 +19,13 @@ Common Options:
   -t, --style NAME                 Output style. Can be nested (default), compact, compressed, or expanded.
   -?, -h, --help                   Show this help message.
   -v, --version                    Print the Sass version.
-      
+
 Watching and Updating:
   --watch                      Watch files or directories for changes.
                                The location of the generated CSS can be set using a colon:
                                  | sass --watch input.sass:output.css
                                  | sass --watch input-dir:output-dir
-                                 
+
   --poll                       Check for file changes manually, rather than relying on the OS.
                                Only meaningful for --watch.
   --update                     Compile files or directories to CSS.
@@ -34,7 +34,7 @@ Watching and Updating:
                                Only meaningful for --update.
   --stop-on-error              If a file fails to compile, exit immediately.
                                Only meaningful for --watch and --update.
-      
+
 Input and Output:
   --scss                       Use the CSS-superset SCSS syntax.
   --sourcemap=TYPE             How to link generated output to the source files.
@@ -50,7 +50,7 @@ Input and Output:
   -g, --debug-info             Emit output that can be used by the FireSass Firebug plugin.
   -l, --line-numbers           Emit comments in the generated CSS indicating the corresponding source line.
   --line-comments
-      
+
 Miscellaneous:
   -i, --interactive            Run an interactive SassScript shell.
   -c, --check                  Just check syntax, don't evaluate.
