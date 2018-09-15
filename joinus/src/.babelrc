@@ -1,0 +1,15 @@
+{
+  "presets": [
+    ["@babel/preset-env", { "modules": false }]
+  ],
+  "plugins": [
+    [
+      "@babel/transform-runtime",
+      {
+        "helpers": true,
+        "polyfill": true,
+        "moduleName": "@babel/runtime"
+      }
+    ]
+  ]
+}

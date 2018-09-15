@@ -90,8 +90,10 @@ window.onload = function () {
     function animation() {
         $$oldPage && $$oldPage.classList.remove('page-current', 'page-active');
         $$currPage.classList.add('page-active');
-        animationEnd();
-        setLastAniFinishedTime();
+        setTimeout(function () {
+          animationEnd();
+          setLastAniFinishedTime();
+        }, 500);
     }
 
     /************ end ***********/
@@ -147,12 +149,21 @@ window.onload = function () {
     // => 滚轮滚动触发事件
     window.addEventListener(EVENT_WHEEL, function(e) {
         /***********   #IMPORTANT  ***********/
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        e.defaultPrevented = true;
 
         // 处理到大部分滚轮事件，防止多次触发计时器解绑和绑定，导致动作延迟高
-        if (!isAniFinished || (Date.now() - getLastAniFinishedTime() < 1000)) return;
+        if (!isAniFinished || (Date.now() - getLastAniFinishedTime() < 1000)) {
+          slider();
+          return false;
+        }
         preWheelTime = curWheelTime;
         curWheelTime = Date.now();
-        if (curWheelTime - preWheelTime < 30) return;
+        if (curWheelTime - preWheelTime < 30) {
+          slider();
+          return false;
+        }
 
         /**************  END  ***************/
 
