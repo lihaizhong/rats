@@ -4,9 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Web Component</title>
   <style>
     *:not(:defined) {
+      display: none;
+    }
+
+    .dialog {
       display: none;
     }
   </style>
@@ -27,7 +31,7 @@
     defineElement([{ name: 'wv-dialog', component: DialogElement }])
     const $$dialog = document.querySelector('#dialog')
 
-    console.log($$dialog.open)
+    console.log($$dialog.shadowRoot)
     // $$dialog.open = false
     // console.log($$dialog.open)
   </script>
