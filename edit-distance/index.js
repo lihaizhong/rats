@@ -45,7 +45,7 @@
     // }
 
     for (let i = 1; i <= lenA; i++) {
-      let old = space[0] || 0
+      let old = space[0] === undefined ? 0 : space[0]
       space[0] = i
       const curA = target[i - 1]
       // 是否连续匹配到字符
@@ -58,7 +58,7 @@
       let finalPos = -1
 
       for (let j = 1; j <= lenB; j++) {
-        const tmp = space[j] || j
+        const tmp = space[j] === undefined ? 0 : space[j]
         const curPos = j - 1
         const curB = compare[curPos]
 
@@ -111,9 +111,8 @@
     return result
   }
 
-  // 设置排序规则，根据权值调整
-  function calcWeight(sort, text) {
-    const textLength = text.length
+  // 计算数据相似度，根据权值调整
+  function calcSimilarity(data) {
     const WEIGHT_CONFIG = {
       // 匹配到的最大长度
       maxLength: 40,
@@ -126,14 +125,14 @@
     }
 
     return (
-      sort.maxLength * WEIGHT_CONFIG.maxLength +
-      sort.count * WEIGHT_CONFIG.count -
-      (sort.position / textLength) * WEIGHT_CONFIG.position -
-      (sort.distance / textLength) * WEIGHT_CONFIG.distance
+      data.maxLength * WEIGHT_CONFIG.maxLength +
+      data.count * WEIGHT_CONFIG.count -
+      data.position * WEIGHT_CONFIG.position -
+      data.distance * WEIGHT_CONFIG.distance
     )
   }
 
-  function getMaxWeight(target, keyNameList = [], match) {
+  function getMaxSimilarity(target, keyNameList = [], match) {
     return keyNameList.reduce((accumulator, currentValue) => {
       const value = getValue(target, currentValue)
 
@@ -141,20 +140,23 @@
         return accumulator
       }
 
-      const sort = editDistance(match.toLowerCase(), value.toLowerCase())
+      const result = editDistance(match.toLowerCase(), value.toLowerCase())
 
-      if (sort.count === 0) {
+      if (result.count === 0) {
         return accumulator
       }
 
-      const weight = calcWeight(sort, value)
-      console.log(match, value, weight, JSON.stringify(sort))
+      const similarity = calcSimilarity(result)
+      // console.log(match, value, similarity, JSON.stringify(result))
 
-      if (accumulator.weight !== undefined && weight < accumulator.weight) {
+      if (
+        accumulator.similarity !== undefined &&
+        accumulator.similarity > similarity
+      ) {
         return accumulator
       }
 
-      return { weight, sort }
+      return { similarity, result }
     }, {})
   }
 
@@ -175,7 +177,7 @@
    * @param {string} keyNameList 如果数组的每一个value为对象，keyNameList为读取对象的属性
    * @returns {array} sortList 排完序的数组
    */
-  function suggest(rowList, match, keyNameList = ['value']) {
+  export default function suggest(rowList, match, keyNameList = ['value']) {
     const len = rowList.length
     const result = []
 
@@ -189,23 +191,23 @@
     for (let i = 0; i < len; i++) {
       const data = rowList[i]
 
-      const { weight, sort } = getMaxWeight(data, keyNameList, match)
+      const { similarity, result } = getMaxSimilarity(data, keyNameList, match)
 
       // 过滤完全没有匹配到的数据
-      if (weight === undefined || sort === undefined) {
+      if (similarity === undefined || result === undefined) {
         continue
       }
 
-      result.push({ weight, sort, data })
+      result.push({ similarity, result, data })
     }
 
     return (
       result
-        // 根据编辑距离计算得到的数据进行排序
-        .sort((a, b) => b.weight - a.weight)
+        // 根据数据的相似度进行排序
+        .sort((a, b) => b.similarity - a.similarity)
         // 还原数据结构
         .map(item => {
-          console.log(item.data.key, item.data.value, item.weight)
+          // console.log(item.data.key, item.data.value, item.similarity)
           return item.data
         })
     )
