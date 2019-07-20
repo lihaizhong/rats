@@ -2,7 +2,7 @@
  * Created by sky on 2017/2/9.
  */
 
-;(function(win) {
+;(function(context) {
   function editDistance(target, compare) {
     const lenA = target.length
     const lenB = compare.length
@@ -213,58 +213,5 @@
     )
   }
 
-  win.suggest = suggest
-})(window)
-;(function() {
-  var $$sug = document.getElementById('suggest')
-  var $$res = document.getElementById('result')
-
-  var mockData = [
-    '今天天气好吗',
-    '今天天气如何',
-    '明天天气好吗',
-    '明天天气如何',
-    '今天我和你出去玩',
-    '明天我们出去玩好吗',
-    '后天天气怎么样',
-    '后天天气好吗',
-    '今天明天',
-    '今天昨天',
-    '今天今天',
-    '今天明天天明',
-    '今天天明天明',
-    '明天天明天明',
-    '明天明天天明天明'
-  ]
-
-  var waitingValue
-
-  $$sug.addEventListener('keypress', function() {
-    waitingValue = this.value
-  })
-
-  $$sug.addEventListener(
-    'keyup',
-    function(e) {
-      var key = this.value,
-        data,
-        template = '<ul>'
-
-      if (waitingValue == null) {
-        return
-      }
-
-      data = window.suggest(mockData, key)
-
-      if (!data.length) {
-        data = mockData
-      }
-
-      for (var i = 0; i < data.length; i++) {
-        template += '<li>' + data[i] + '</li>'
-      }
-      $$res.innerHTML = template += '</ul>'
-    },
-    false
-  )
-})()
+  context.suggest = suggest
+})(window || global)

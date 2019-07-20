@@ -8,7 +8,7 @@
 
 >     Usage: sass [options] [INPUT] [OUTPUT]
 
-```text
+```bash
 Description:
   Converts SCSS or Sass files to CSS.
 
