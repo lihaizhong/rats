@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>MutationObserver</title>
+</head>
+
+<body>
+  <!-- MutationObserver 无法监听到input的输入 -->
+  <input type="text" id="moInput" />
+
+  <script>
+    const $moInput = document.getElementById('moInput');
+    const config = {attributes: true, childList: true, subtree: true};
+
+    const ob = new MutationObserver(function(mutationList) {
+      for (const mutation of mutationList) {
+        const {type} = mutation;
+        console.log(mutation.type, mutation);
+        switch (type) {
+        case 'childList':
+          console.log('一个子元素被添加或者删除');
+          break;
+        case 'attributes':
+          console.log(`属性${mutation.attributeName}被修改`);
+          break;
+        case 'subtree':
+          console.log('子树被修改');
+          break;
+        default:
+          break;
+        }
+      }
+    });
+
+    ob.observe($moInput, config);
+  </script>
+</body>
+
+</html>

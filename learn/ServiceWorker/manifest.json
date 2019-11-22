@@ -1,0 +1,16 @@
+{
+  "short_name": "桌面图标名称",
+  "name": "完整的名称",
+  "icon": [
+    {
+      "src": "",
+      "type": "",
+      "sizes": ""
+    }
+  ],
+  "start_url": "index.html",
+  "scope": "/",
+  "background_color": "blue",
+  "display": "standalone",
+  "theme_color": "blue"
+}
