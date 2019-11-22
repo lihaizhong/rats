@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "我的时钟",
+  "author": "sky",
+  "version": "0.1",
+  "description": "我的第一个Chrome扩展",
+  "icons": {
+    "48": "images/clock.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "48": "images/clock.png"
+    },
+    "default_title": "我的时钟",
+    "default_popup": "popup.html"
+  }
+}
