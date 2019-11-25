@@ -28,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/lihaizhong/rats/issues"
   },
-  "homepage": "https://github.com/lihaizhong/rats#readme"
+  "homepage": "https://github.com/lihaizhong/rats#readme",
+  "dependencies": {
+    "recast": "^0.18.5"
+  }
 }
