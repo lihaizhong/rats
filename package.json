@@ -6,19 +6,6 @@
   "scripts": {
     "learn": "serve -p 3001 --debug ./learn/VueLearn/modules/"
   },
-  "devDependencies": {
-    "babel-loader": "^8.0.2",
-    "karma-mocha": "^1.3.0",
-    "karma-chai": "^0.1.0",
-    "karma-mocha-reporter": "^2.2.5",
-    "karma-webpack": "^3.0.5",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-coverage": "^1.1.2",
-    "webpack": "^4.20.2",
-    "karma": "^3.1.4",
-    "mocha": "^5.2.0",
-    "serve": "^11.2.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lihaizhong/rats.git"
@@ -29,6 +16,16 @@
     "url": "https://github.com/lihaizhong/rats/issues"
   },
   "homepage": "https://github.com/lihaizhong/rats#readme",
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "serve": "^11.2.0"
+  },
   "dependencies": {
     "recast": "^0.18.5"
   }
