@@ -1,4 +1,4 @@
-const recast = require("recast");
+const recast = require('recast')
 
 const {
   identifier,
@@ -7,10 +7,10 @@ const {
   memberExpression,
   assignmentExpression,
   arrowFunctionExpression
-} = recast.types.builders;
+} = recast.types.builders
 
-recast.run(function(ast, printSource) {
-  console.log(ast);
+recast.run(function (ast, printSource) {
+  console.log(ast)
 
   // 创建一个块级作用域
   // printSource(blockStatement([]));
@@ -31,10 +31,10 @@ recast.run(function(ast, printSource) {
   printSource(
     expressionStatement(
       assignmentExpression(
-        "=",
-        memberExpression(identifier("exports"), identifier("add")),
+        '=',
+        memberExpression(identifier('exports'), identifier('add')),
         arrowFunctionExpression([], blockStatement([]))
       )
     )
-  );
-});
+  )
+})

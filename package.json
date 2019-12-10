@@ -16,6 +16,12 @@
     "url": "https://github.com/lihaizhong/rats/issues"
   },
   "homepage": "https://github.com/lihaizhong/rats#readme",
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "printWidth": 100
+  },
   "devDependencies": {
     "eslint": "^6.7.2",
     "eslint-config-standard": "^14.1.0",

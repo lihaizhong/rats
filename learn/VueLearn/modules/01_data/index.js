@@ -3,7 +3,7 @@
  * @param {object} constants
  * @return {object} constants
  */
-function generateConstants(constants) {
+function generateConstants (constants) {
   const nativeType = Object.prototype.toString.call(constants).slice(8)
   if (['array', 'object'].includes(nativeType)) {
     const keys = Object.keys(constants)
@@ -29,7 +29,7 @@ const CONSTANTS = generateConstants({
 
 new Vue({
   el: '#app',
-  data() {
+  data () {
     const value = {
       name: 'ggg',
       age: 26,
@@ -49,7 +49,7 @@ new Vue({
 
     return value
   },
-  created() {
+  created () {
     // setter
     this.name = 'hhh'
     this.age = 27

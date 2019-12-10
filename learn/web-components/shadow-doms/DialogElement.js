@@ -1,6 +1,5 @@
 class DialogElement extends HTMLElement {
-
-  constructor () {
+  constructor() {
     super()
     const shadowRoot = this.attachShadow({ mode: 'closed' })
     const template = `
@@ -72,11 +71,11 @@ class DialogElement extends HTMLElement {
     shadowRoot.innerHTML = style + template
   }
 
-  get open () {
+  get open() {
     return !this.hasAttribute('hidden')
   }
 
-  set open (value) {
+  set open(value) {
     if (value) {
       this.removeAttribute('hidden')
     } else {

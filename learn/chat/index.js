@@ -3,13 +3,13 @@ const net = require('net')
 const chatServer = net.createServer()
 const clientList = []
 
-module.exports = function service() {
+module.exports = function service () {
   /**
    * 广播消息
    * @param {string} message
    * @param {Client} client
    */
-  function broadcast(message, client) {
+  function broadcast (message, client) {
     const cleanup = []
 
     // 遍历所有连接的客户端

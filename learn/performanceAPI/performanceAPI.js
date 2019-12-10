@@ -34,19 +34,19 @@ const loadTime = timing.loadEventEnd - timing.navigationStart
 console.log(loadTime)
 
 // 内存占用的具体数据
-performance.memory
+console.log(performance.memory)
 // 返回当前网页自 performance.timing 到现在的时间，
 // 可以精确到微秒，用于更加精确的计数。但实际上，目前网页性能通过毫秒来计算就足够了
-performance.now()
+console.log(performance.now())
 // 获取页面所有加载资源的 performance.timing 情况。
 // 浏览器获取网页时，会对网页中每一个对象（脚本文件、样式表、图片文件等）发出一个 HTTP 请求。
 // performance.getEntries 方法以数组形式返回所有请求的时间统计信息。
-performance.getEntries()
+console.logg(performance.getEntries())
 // performance 还可以提供用户行为信息，例如网络请求的类型和重定向的次数等。
 // 一般都存放在 performance.navigation 对象里面
-performance.navigation
+console.log(performance.navigation)
 // 记录当前网页重定向的次数
-performance.navigation.redirectCount
+console.log(performance.navigation.redirectCount)
 
 // Profile 工具
 // 测试页面脚本运行时系统内存和CPU资源占用情况

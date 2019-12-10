@@ -17,29 +17,31 @@
  * main.js
  */
 
-!function() {
+function getAppCacheStatus () {
   const appCache = window.applicationCache
 
   appCache.update() // 尝试更新用户的Application Cache
 
   switch (appCache.status) {
-  case appCache.UNCACHED: // 0，表示未缓存
-    return 'UNCACHED'
-  case appCache.IDLE: // 1，表示闲置
-    return 'IDLE'
-  case appCache.CHECKING: // 2，表示检查中
-    return 'CHECKING'
-  case appCache.DOWNLOADING: // 3，表示下载中
-    return 'DOWNLOADING'
-  case appCache.UPDATEREADY: // 4，表示已更新
-    appCache.swapCache()
-    return 'UPDATEREADY'
-  case appCache.OBSOLETE: // 5，表示已失效
-    return 'OBSOLETE'
-  default:
-    return 'UNKNOWN CACHE STATUS'
+    case appCache.UNCACHED: // 0，表示未缓存
+      return 'UNCACHED'
+    case appCache.IDLE: // 1，表示闲置
+      return 'IDLE'
+    case appCache.CHECKING: // 2，表示检查中
+      return 'CHECKING'
+    case appCache.DOWNLOADING: // 3，表示下载中
+      return 'DOWNLOADING'
+    case appCache.UPDATEREADY: // 4，表示已更新
+      appCache.swapCache()
+      return 'UPDATEREADY'
+    case appCache.OBSOLETE: // 5，表示已失效
+      return 'OBSOLETE'
+    default:
+      return 'UNKNOWN CACHE STATUS'
   }
 }
+
+getAppCacheStatus()
 
 /**
  * cacheStorage
@@ -62,7 +64,7 @@ if (navigator.serviceWorker) {
       console.log('service worker 注册成功')
     })
     .catch(err => {
-      console.log('service worker 注册失败')
+      console.log('service worker 注册失败', err)
     })
 }
 

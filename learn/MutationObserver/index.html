@@ -13,30 +13,30 @@
   <input type="text" id="moInput" />
 
   <script>
-    const $moInput = document.getElementById('moInput');
-    const config = {attributes: true, childList: true, subtree: true};
+    const $moInput = document.getElementById('moInput')
+    const config = { attributes: true, childList: true, subtree: true }
 
-    const ob = new MutationObserver(function(mutationList) {
+    const ob = new MutationObserver(function (mutationList) {
       for (const mutation of mutationList) {
-        const {type} = mutation;
-        console.log(mutation.type, mutation);
+        const { type } = mutation
+        console.log(mutation.type, mutation)
         switch (type) {
-        case 'childList':
-          console.log('一个子元素被添加或者删除');
-          break;
-        case 'attributes':
-          console.log(`属性${mutation.attributeName}被修改`);
-          break;
-        case 'subtree':
-          console.log('子树被修改');
-          break;
-        default:
-          break;
+          case 'childList':
+            console.log('一个子元素被添加或者删除')
+            break
+          case 'attributes':
+            console.log(`属性${mutation.attributeName}被修改`)
+            break
+          case 'subtree':
+            console.log('子树被修改')
+            break
+          default:
+            break
         }
       }
-    });
+    })
 
-    ob.observe($moInput, config);
+    ob.observe($moInput, config)
   </script>
 </body>
 

@@ -1,15 +1,15 @@
 function _defineCustomElements (components) {
   components.forEach(function (vDom) {
-    let name = vDom.name
-    let component = vDom.component
-    let extend = vDom.extends || {}
+    const name = vDom.name
+    const component = vDom.component
+    const extend = vDom.extends || {}
 
     window.customElements.define(name, component, extend)
   })
 }
 
 function _watchCustomElementDefined (components) {
-  let promises = components.map(function (vDom) {
+  const promises = components.map(function (vDom) {
     return window.customElements.whenDefined(vDom.name)
   })
 

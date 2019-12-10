@@ -22,7 +22,7 @@ if (cluster.isMaster) {
 } else {
   service()
 
-  setInterval(function report() {
+  setInterval(function report () {
     process.send({ memory: process.memoryUsage(), process: process.pid })
   }, 1000)
 }

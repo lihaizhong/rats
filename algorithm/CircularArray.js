@@ -1,16 +1,13 @@
 export default class CircularArray {
-  _head = -1
-
-  _tail = -1
-
-  _length = 0
-
-  constructor(length) {
+  constructor (length) {
+    this._head = -1
+    this._tail = -1
+    this._length = 0
     this._arr = new Array(length)
     this._length = length
   }
 
-  setItem(value) {
+  setItem (value) {
     const length = this._length
 
     this._tail = (this._tail + 1) % length
@@ -24,12 +21,12 @@ export default class CircularArray {
     this._arr[this._tail] = value
   }
 
-  getItem(index) {
+  getItem (index) {
     const realIndex = (this._head + index) % length
     return this._arr[realIndex]
   }
 
-  getAll() {
+  getAll () {
     if (this._head < this._tail) {
       return this._arr.slice(this._head, this._tail)
     } else {
@@ -39,7 +36,7 @@ export default class CircularArray {
     }
   }
 
-  clear(index) {
+  clear (index) {
     this._head = -1
     this._tail = -1
     this._arr = new Array(this._length)
