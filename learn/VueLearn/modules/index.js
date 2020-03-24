@@ -1,5 +1,5 @@
 const mixin = {
-  data() {
+  data () {
     return {
       message: 'hello vue mixin',
       value: 'mixin value',
@@ -8,13 +8,13 @@ const mixin = {
     }
   },
   methods: {
-    mixinMethods1() {},
-    mixinMethods2() {}
+    mixinMethods1 () {},
+    mixinMethods2 () {}
   }
 }
 
 const mixin1 = {
-  data() {
+  data () {
     return {
       message: 'hello vue mixin1',
       value: 'mixin value1',
@@ -23,27 +23,25 @@ const mixin1 = {
     }
   },
   methods: {
-    mixin1Methods1() {},
-    mixin1Methods2() {}
+    mixin1Methods1 () {},
+    mixin1Methods2 () {}
   }
 }
 
-Vue.mixin({})
-
 Vue.component('ds-render-template', {
   functional: true,
-  render(h, context) {
+  render (h, context) {
     return h('div', context.data, [h('template', 'hello render function')])
   }
 })
 
 Vue.component('ds-simple-template', {
-  data() {
+  data () {
     return {
       message: 'hello simple template'
     }
   },
-  created() {
+  created () {
     console.log('second vm: ', this)
   },
   template: `
@@ -63,27 +61,27 @@ Vue.component('ds-template', {
       default: 'outer'
     }
   },
-  provide: function() {
+  provide: function () {
     return {
       pValue: 'provide template value'
     }
   },
-  data() {
+  data () {
     return {
       message: 'ds-template',
       count: 0
     }
   },
   computed: {
-    com() {
+    com () {
       return 'dddd'
     }
   },
-  created() {
+  created () {
     console.log('first vm: ', this)
   },
   methods: {
-    onHandleAddCount() {
+    onHandleAddCount () {
       this.count++
     }
   },
@@ -99,7 +97,7 @@ Vue.component('ds-template', {
 })
 
 const DsInternalTemplate = Vue.extend({
-  data() {
+  data () {
     return {
       message: 'ds internal template'
     }
@@ -116,7 +114,7 @@ let templateIndex = 0
 
 const app = new Vue({
   el: '#app',
-  provide: function() {
+  provide: function () {
     return {
       pValue: 'provide value',
       pValue1: 'provide root value'
@@ -126,7 +124,7 @@ const app = new Vue({
     DsInternalTemplate: DsInternalTemplate
   },
   mixins: [mixin, mixin1],
-  data() {
+  data () {
     return {
       message: 'hello vue',
       message2: 'hello vue2',
@@ -141,37 +139,37 @@ const app = new Vue({
     }
   },
   computed: {
-    messageComputed() {
+    messageComputed () {
       return this.message + ' computed'
     },
     messageComputed2: {
-      get() {
+      get () {
         return this.message2 + ' computed'
       }
     }
   },
   watch: {
-    message(newVal) {
+    message (newVal) {
       if (newVal === '更新消息') {
         this.value = '新的消息'
       }
     },
     object: {
       deep: true,
-      handler() {
+      handler () {
         console.log('object __ob__: ', this.object.__ob__)
       }
     },
     arr: {
       immediate: true,
-      handler() {
+      handler () {
         console.log('arr __ob__', this.arr.__ob__)
       }
     }
   },
-  mounted() {
+  mounted () {
     const slf = this
-    setTimeout(function delay() {
+    setTimeout(function delay () {
       slf.arr.push(5)
       slf.object.a = 9
       slf.message = '更新消息'
@@ -184,9 +182,9 @@ const app = new Vue({
     }, 2000)
   },
   methods: {
-    instanceMethods1() {},
-    instanceMethods2() {},
-    onHandleSwitchTemplate() {
+    instanceMethods1 () {},
+    instanceMethods2 () {},
+    onHandleSwitchTemplate () {
       templateIndex = (templateIndex + 1) % switchTemplates.length
 
       this.dsTemplateComponent = switchTemplates[templateIndex]

@@ -5203,6 +5203,8 @@
     if (!(this instanceof Vue)) {
       warn('Vue is a constructor and should be called with the `new` keyword')
     }
+
+    debugger
     this._init(options)
   }
 
@@ -5259,6 +5261,7 @@
      * Class inheritance
      */
     Vue.extend = function(extendOptions) {
+      debugger
       extendOptions = extendOptions || {}
       var Super = this
       var SuperId = Super.cid
