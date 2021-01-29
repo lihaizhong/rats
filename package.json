@@ -4,7 +4,7 @@
   "description": "## 小白的杂记、学习与演示",
   "main": "index.js",
   "scripts": {
-    "learn": "serve -p 3001 --debug ./learn/VueLearn/modules/"
+    "learn": "serve -p 3001 --debug ./learn/"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,8 @@
     "serve": "^11.2.0"
   },
   "dependencies": {
-    "recast": "^0.18.5"
+    "parcel-bundler": "^1.12.4",
+    "recast": "^0.18.5",
+    "tapable": "^2.2.0"
   }
 }
