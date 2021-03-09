@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Child HTML</title>
+</head>
+<body>
+  <div>我是一张子页面</div>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      window.name = '子页面'
+      window.addEventListener('message', function (event) {
+        var data = event.data
+        // Parent Window
+        var source = event.source
+
+        console.log('我是子页面', window.location.origin, data, source)
+      }, false)
+
+      setTimeout(function () {
+        window.top.postMessage(
+          {
+            type: 'parent message',
+            message: '我是子页面的消息'
+          },
+          window.location.origin
+        )
+      })
+    }, false)
+  </script>
+</body>
+</html>

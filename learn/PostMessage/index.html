@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parent HTML</title>
+</head>
+<body>
+  <iframe id="child" src="./child.html" frameborder="0"></iframe>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      window.name = '父页面'
+      var frame = document.querySelector('#child')
+
+      frame.style.width = '100%'
+      frame.style.height = '100%'
+
+      window.addEventListener('message', function (event) {
+        var data = event.data
+        // Child Window
+        var source = event.source
+
+        console.log('我是父页面', window.location.origin, data, source)
+      }, false)
+
+      setTimeout(function () {
+        frame.contentWindow.postMessage(
+          {
+            type: 'parent message',
+            message: '我是父页面的消息'
+          },
+          window.location.origin
+        )
+      }, 1000)
+    }, false)
+  </script>
+</body>
+</html>
