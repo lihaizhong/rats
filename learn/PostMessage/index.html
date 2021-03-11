@@ -7,33 +7,65 @@
   <title>Parent HTML</title>
 </head>
 <body>
-  <iframe id="child" src="./child.html" frameborder="0"></iframe>
+  <iframe id="child" frameborder="0"></iframe>
 
   <script type="text/javascript">
     window.addEventListener('load', function () {
       window.name = '父页面'
       var frame = document.querySelector('#child')
+      var lastWindow = frame.contentWindow
 
       frame.style.width = '100%'
       frame.style.height = '100%'
 
-      window.addEventListener('message', function (event) {
-        var data = event.data
-        // Child Window
-        var source = event.source
+      // 在load之前向iframe的window对象注入参数
+      Object.defineProperty(lastWindow, '__POST_MESSAGE_TEST__', {
+        get () {
+          return '测试成功！'
+        },
+        set () {
+          throw new Error('该属性只读！')
+        }
+      })
+      // 在load之前向iframe的window对象注入参数
+      lastWindow.__POST_MESSAGE_TEST_01__ = '测试成功！'
 
-        console.log('我是父页面', window.location.origin, data, source)
+      frame.addEventListener('load', function () {
+        // 窗口重新加载完成后，frame中的window对象会被重置为初始状态
+        var frameWindow = frame.contentWindow
+
+        console.log('两次contentWindow是否相同？', lastWindow === frameWindow)
+        console.log(
+          '查看子组件是否注入__POST_MESSAGE_TEST__',
+          frameWindow.__POST_MESSAGE_TEST__,
+          lastWindow.__POST_MESSAGE_TEST__
+        ) // undefined, undefined
+        console.log(
+          '查看子组件是否注入__POST_MESSAGE_TEST_01__',
+          frameWindow.__POST_MESSAGE_TEST_01__,
+          lastWindow.__POST_MESSAGE_TEST_01__
+        ) // undefined, undefined
+
+        window.addEventListener('message', function (event) {
+          var data = event.data
+          // Child Window
+          var source = event.source
+
+          console.log('我是父页面', window.location.origin, data, source)
+        }, false)
+
+        setTimeout(function () {
+          frame.contentWindow.postMessage(
+            {
+              type: 'parent message',
+              message: '我是父页面的消息'
+            },
+            window.location.origin
+          )
+        }, 1000)
       }, false)
 
-      setTimeout(function () {
-        frame.contentWindow.postMessage(
-          {
-            type: 'parent message',
-            message: '我是父页面的消息'
-          },
-          window.location.origin
-        )
-      }, 1000)
+      frame.setAttribute('src', './child.html')
     }, false)
   </script>
 </body>
