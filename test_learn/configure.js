@@ -1,22 +1,33 @@
-function configure (values) {
+function validateDocRoot (docRoot) {
   const fs = require('fs')
-  const config = { docRoot: './public' }
+  const stat = fs.statSync(docRoot)
 
-  for (const key in values) {
-    config[key] = values[key]
+  if (!stat.isDirectory()) {
+    throw new Error('Is not valid!')
   }
+}
 
-  try {
-    const stat = fs.statSync(config.docRoot)
-    if (!stat.isDirectory()) {
-      throw new Error('Is not valid')
+const schemas = {
+  docRoot: {
+    validator: validateDocRoot,
+    default: './test_learn/public'
+  }
+}
+
+exports.configure = function (values) {
+  const config = {}
+
+  for (const key in schemas) {
+    if (typeof values[key] === 'undefined') {
+      config[key] = schemas[key].default
+    } else {
+      config[key] = values[key]
+
+      if (typeof schemas[key].validator === 'function') {
+        schemas[key].validator(values[key])
+      }
     }
-  } catch (ex) {
-    console.log(`** ${config.docRoot} does not exist or is not a directory!! **`)
-    return
   }
 
   return config
 }
-
-module.exports = configure

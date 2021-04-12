@@ -1,8 +1,8 @@
-const configure = require('./configure')
+const { configure } = require('./configure')
 
 describe('configure tests', function () {
   it('undef if docRoot does not exist', function () {
-    expect(configure({ docRoot: '/xxx' })).toBeUndefined()
+    expect(configure({ docRoot: '/xxx' })).toThrow()
   })
 
   it('not undef if docRoot does exist', function () {
@@ -12,11 +12,7 @@ describe('configure tests', function () {
   it('adds values to config hash', function () {
     const config = configure({ docRoot: './test_learn/public', zany: 'crazy' })
     expect(config).not.toBeUndefined()
-    expect(config.zany).toEqual('crazy')
+    expect(config.zany).toBeUndefined()
     expect(config.docRoot).toEqual('./test_learn/public')
   })
-
-  it('verifies value1 good ...', function () {})
-
-  it('verifies value1 bad ...', function () {})
 })
