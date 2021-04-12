@@ -66,6 +66,13 @@
       }, false)
 
       frame.setAttribute('src', './child.html')
+
+      // 触发load事件
+      setTimeout(function () {
+        var event = new Event('load')
+
+        frame.dispatchEvent(event)
+      }, 6000)
     }, false)
   </script>
 </body>

@@ -2,7 +2,8 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    node: true
+    node: true,
+    'jest/globals': true
   },
   extends: ['standard'],
   globals: {
@@ -15,7 +16,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  plugins: ['html'],
+  plugins: ['html', 'jest'],
   rules: {
     'no-debugger': 0
   }

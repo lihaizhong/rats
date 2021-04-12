@@ -4,7 +4,8 @@
   "description": "## 小白的杂记、学习与演示",
   "main": "index.js",
   "scripts": {
-    "learn": "serve -p 3001 --debug ./learn/"
+    "learn": "serve -p 3001 --debug ./learn/",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -27,9 +28,12 @@
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-html": "^6.1.1",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.3.5",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-standard": "^4.1.0",
+    "jest": "^26.6.3",
+    "jscheckstyle": "0.0.9",
     "lerna": "^3.22.1",
     "serve": "^11.3.2"
   },
