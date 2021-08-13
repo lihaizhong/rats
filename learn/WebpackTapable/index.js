@@ -13,21 +13,21 @@ function logger (name) {
  * SyncWaterfallHook: 接收至少一个参数，上一个注册的回调返回值会作为下一个注册的回调参数。
  * SyncLoopHook: 有点类似SyncBailHook, 执行过程中注册的回调返回**非undefined时继续执行**
  */
-;(function () {
-  const log = logger('Sync Hook')
-  const hook = new SyncHook(['name'])
+// ;(function () {
+//   const log = logger('Sync Hook')
+//   const hook = new SyncHook(['name'])
 
-  hook.tap('hello', name => {
-    log(`hello, ${name}`)
-  })
+//   hook.tap('hello', name => {
+//     log(`hello ${name}`)
+//   })
 
-  hook.tap('hello again', name => {
-    log(`hello, ${name}, again`)
-  })
+//   hook.tap('hello again', name => {
+//     log(`hello ${name} again`)
+//   })
 
-  hook.call('sky')
-  hook.call('lee')
-})()
+//   hook.call('sky')
+//   hook.call('lee')
+// })()
 
 /**
  * 异步钩子
@@ -37,30 +37,32 @@ function logger (name) {
  * AsyncSeriesBailHook: 执行过程中注册的回调返回非undefined时就会直接执行callAsync或者Promise中的函数（由于串行执行的原因，注册的其他回调不会执行）
  * AsyncSeriesWaterfallHook: 与SyncWaterfallHook类似，上一个注册的异步回调执行之后的返回值会传递给下一个注册的回调。
  */
-;(function () {
-  const log = logger('Async Parallel Hook')
-  const hook = new AsyncParallelHook(['name'])
+// ;(function () {
+//   const log = logger('Async Parallel Hook')
+//   const hook = new AsyncParallelHook(['name'])
 
-  hook.tapAsync('hello', (name, done) => {
-    setTimeout(() => {
-      log(`hello ${name}`)
-      done()
-    }, 2000)
-  })
+//   hook.tapAsync('hello', (name, done) => {
+//     setTimeout(() => {
+//       log(`hello ${name}`)
+//       done(null, 'async')
+//     }, 2000)
+//   })
 
-  hook.tapPromise('hello again', name => {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        log(`hello ${name}, again`)
-        resolve()
-      }, 1000)
-    })
-  })
+//   hook.tapPromise('hello again', name => {
+//     return new Promise(resolve => {
+//       setTimeout(() => {
+//         log(`hello ${name} again`)
+//         resolve('promise')
+//       }, 1000)
+//     })
+//   })
 
-  hook.callAsync('sky', () => {
-    log('async parallel hook done!')
-  })
-})()
+//   hook.callAsync('sky async', () => {
+//     log('async parallel hook done!')
+//   })
+
+//   hook.promise('sky promise')
+// })()
 
 ;(function () {
   const log = logger('Async Series Hook')
@@ -76,13 +78,18 @@ function logger (name) {
   hook.tapPromise('hello again', name => {
     return new Promise(resolve => {
       setTimeout(() => {
-        log(`hello ${name}, again`)
-        resolve()
+        log(`hello ${name} again`)
+        resolve(111)
       }, 1000)
     })
   })
 
-  hook.callAsync('sky', () => {
+  hook.callAsync('sky async', (result) => {
+    console.log(result)
     log('async series hook done!')
+  })
+
+  hook.promise('sky promise').then(result => {
+    console.log(result)
   })
 })()

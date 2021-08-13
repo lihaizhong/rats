@@ -1,68 +1,60 @@
-/**
- * 将base64格式的applicationServerKey转换成Uint8Array格式
- * @param {string} base64String
- * @return {Array} outputArray
- */
-function urlBase64ToUint8Array (base64String) {
-  const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
-  const str = base64String + padding
-  const base64 = str.replace(/-/g, '+').replace(/_/g, '/')
-  const rawData = window.atob(base64)
-  const len = rawData.length
-  const outputArray = new Uint8Array(len)
-
-  for (let i = 0; i < len; i++) {
-    outputArray[i] = rawData.charAt(i)
-  }
-
-  return outputArray
-}
-
-/**
- * 订阅
- * @param {Register} registration
- */
-function subscribe (registration) {
-  registration.pushManager
-    .subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array('<applicationServerKey>')
-    })
-    .then(function (subscription) {
-      // 发送推送订阅对象到服务器，具体实现中发送请求到后端API
-      console.log(subscription)
-    })
-    .catch(function (err) {
-      console.error(err)
-      if (Notification.permission === 'denied') {
-        // 用户拒绝了订阅请求
-      }
-    })
-}
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
+const PageUtils = {
+  isSupportedSW() {
+    return 'serviceWorker' in navigator
+  },
+  initialize() {
+    //* NOTE 引用文件地址是相对于URL的，而不是相对于引用这个文件的地址
+    //* NOTE scope是选填的，可以用于指定控制内容的子目录
     navigator.serviceWorker
-      .register('./sw.js', { scope: '/' })
+      .register('/service-worker.js?t=v1')
       .then(function (registration) {
-        console.log(registration)
+        const sw = registration.installing || registration.waiting || registration.active || null;
 
-        registration.onupdatefound = function () {
-          const installingWorker = registration.installing
+        console.log('ServiceWorker注册成功！');
 
-          installingWorker.onstatechange = function () {
-            if (installingWorker.state === 'installed') {
-              if (navigator.serviceWorker.controller) {
-              } else {
-              }
+        if (sw) {
+          sw.addEventListener('statechange', () => {
+            if (sw.state === 'installed') {
+              console.log('您有新的服务已安装完成！');
             }
-          }
+          })
+        }
+        registration.onupdatefound = function () {
+          registration.update();
         }
       })
       .catch(function (err) {
         console.log(err)
-      })
+      });
+  },
+  checkStatus() {
+    return new Promise((resolve) => {
+      let script = document.createElement('script');
+      script.src = './services/sw-on-off.js'
+      script.async = true
+      script.onload = function () {
+        if (window.__SW_TURN_OFF__) {
+          navigator.serviceWorker.getRegistrations()
+            .then((registrations) => {
+              for (let registration of registrations) {
+                registration.unregister()
+              }
+              resolve();
+            });
+        } else {
+          resolve();
+        }
+      }
 
-    navigator.serviceWorker.ready.then(subscribe)
-  })
+      document.head.appendChild(script);
+    })
+
+  }
+};
+
+if (PageUtils.isSupportedSW()) {
+  PageUtils.checkStatus()
+    .then(() => {
+      PageUtils.initialize();
+    });
 }
