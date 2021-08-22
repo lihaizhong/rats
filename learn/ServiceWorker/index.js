@@ -35,6 +35,7 @@ const PageUtils = {
                 console.log('ServiceWorker有冗余！');
                 break;
             }
+
             if (sw.state === 'installed') {
               console.log('您有新的服务已安装完成！');
               registration.update();
