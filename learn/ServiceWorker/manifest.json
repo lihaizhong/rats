@@ -1,6 +1,6 @@
 {
-  "short_name": "桌面图标名称",
-  "name": "完整的名称",
+  "short_name": "PWA",
+  "name": "PWA测试",
   "icon": [
     {
       "src": "",
