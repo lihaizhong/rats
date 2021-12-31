@@ -4,7 +4,7 @@
   "description": "## 小白的杂记、学习与演示",
   "main": "index.js",
   "scripts": {
-    "serve": "serve -p 3001 --debug ./learn/ServiceWorker/",
+    "serve": "serve -p 3001 --debug ./",
     "test": "jest --coverage"
   },
   "repository": {
@@ -26,19 +26,19 @@
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-html": "^6.1.2",
-    "eslint-plugin-import": "^2.24.0",
-    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-html": "^6.2.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jest": "^24.7.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-promise": "^5.1.1",
     "eslint-plugin-standard": "^5.0.0",
-    "jest": "^27.0.6",
+    "jest": "^27.3.1",
     "jscheckstyle": "0.0.9",
-    "parcel": "^2.0.0-rc.0",
-    "serve": "^12.0.0"
+    "parcel": "^2.0.0",
+    "serve": "^12.0.1"
   },
   "dependencies": {
     "recast": "^0.20.5",
-    "tapable": "^2.2.0"
+    "tapable": "^2.2.1"
   }
 }
