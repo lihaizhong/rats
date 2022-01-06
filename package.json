@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "## 小白的杂记、学习与演示",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "serve": "serve -p 3001 --debug ./",
     "test": "jest --coverage"
@@ -24,21 +25,23 @@
     "printWidth": 100
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
+    "eslint": "^8.6.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-html": "^6.2.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-jest": "^24.7.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^25.3.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.1",
+    "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-standard": "^5.0.0",
-    "jest": "^27.3.1",
+    "jest": "^27.4.6",
     "jscheckstyle": "0.0.9",
-    "parcel": "^2.0.0",
-    "serve": "^12.0.1"
+    "parcel": "^2.0.1",
+    "serve": "^13.0.2"
   },
   "dependencies": {
     "recast": "^0.20.5",
-    "tapable": "^2.2.1"
+    "rxjs": "^7.5.1",
+    "tapable": "^2.2.1",
+    "xstate": "^4.27.0"
   }
 }
