@@ -1,79 +1,84 @@
-import { assign, createMachine, interpret } from 'xstate'
+import { assign, createMachine } from 'xstate'
 
-const formInputMachine = createMachine({
-  id: 'formInput',
-  initial: 'active',
-  context: {
-    value: '',
-    errorMessage: ''
-  },
-  states: {
-    active: {
-      on: { DISABLED: 'disabled' },
-      type: 'parallel',
-      states: {
-        focus: {
-          initial: 'unfocused',
-          states: {
-            focused: {
-              on: { BLUR: 'unfocused' }
-            },
-            unfocused: {
-              on: { FOCUS: 'focused' }
-            }
-          }
-        },
-        validation: {
-          initial: 'pending',
-          on: {
-            CHANGE: {
-              target: '.pending',
-              actions: 'assignValueToContext'
+createMachine(
+  {
+    id: 'formInput',
+    initial: 'active',
+    context: {
+      value: '',
+      errorMessage: ''
+    },
+    states: {
+      active: {
+        on: { DISABLED: 'disabled' },
+        type: 'parallel',
+        states: {
+          focus: {
+            initial: 'unfocused',
+            states: {
+              focused: {
+                on: { BLUR: 'unfocused' }
+              },
+              unfocused: {
+                on: { FOCUS: 'focused' }
+              }
             }
           },
-          states: {
-            pending: {
-              on: {
-                REPORT_INVALID: {
-                  target: 'invalid',
-                  actions: 'assignReasonToErrorMessage'
-                }
-              },
-              invoke: {
-                src: 'validateField',
-                onDone: 'valid'
+          validation: {
+            initial: 'pending',
+            on: {
+              CHANGE: {
+                target: '.pending',
+                actions: 'assignValueToContext'
               }
             },
-            valid: {},
-            invalid: {}
+            states: {
+              pending: {
+                on: {
+                  REPORT_INVALID: {
+                    target: 'invalid',
+                    actions: 'assignReasonToErrorMessage'
+                  }
+                },
+                invoke: {
+                  src: 'validateField',
+                  onDone: 'valid',
+                  onError: 'invalid'
+                }
+              },
+              valid: {},
+              invalid: {}
+            }
           }
         }
+      },
+      disabled: {
+        on: { ENABLED: 'active' }
       }
-    },
-    disabled: {
-      on: { ENABLED: 'active' }
     }
   },
-  actions: {
-    assignReasonToErrorMessage: assign((context, event) => {
-      if (event.type !== 'REPORT_INVALID') return {}
+  {
+    actions: {
+      assignReasonToErrorMessage: assign((context, event) => {
+        if (event.type !== 'REPORT_INVALID') return {}
 
-      return { errorMessage: event.reason }
-    }),
-    assignValueToContext: assign((context, event) => {
-      if (event.type !== 'CHANGE') return {}
+        return { errorMessage: event.reason }
+      }),
+      assignValueToContext: assign((context, event) => {
+        if (event.type !== 'CHANGE') return {}
 
-      return { value: event.value }
-    })
-  },
-  services: {
-    validateField: (context) => (send) => {
-      if (context.value === '') {
-        send({
-          type: 'REPORT_INVALID',
-          reason: 'Value cannot be empty!'
-        })
+        return { value: event.value }
+      })
+    },
+    services: {
+      validateField: (context) => (send) => {
+        if (context.value === '') {
+          send({
+            type: 'REPORT_INVALID',
+            reason: 'Value cannot be empty!'
+          })
+        }
       }
     }
   }
-})
+)
