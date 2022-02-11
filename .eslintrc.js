@@ -5,7 +5,6 @@ module.exports = {
     node: true,
     'jest/globals': true
   },
-  extends: ['standard'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
