@@ -2,9 +2,25 @@ import { assign, createMachine } from 'xstate'
 
 const counterMachine = createMachine({
   id: 'counter',
-  state: 'pending',
+  initial: 'pending',
   context: {
-    
+    time: 60
+  },
+  states: {
+    pending: {
+      on: {
+
+      }
+    },
+    timing: {},
+    finished: {
+      type: 'finish',
+      invoke: {
+        src: '',
+        onDone: '',
+        onError: ''
+      }
+    }
   }
 })
 
