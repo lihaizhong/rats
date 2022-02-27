@@ -1,10 +1,3 @@
-<!--
- Copyright (c) 2022 Sangbaipi
- 
- This software is released under the MIT License.
- https://opensource.org/licenses/MIT
--->
-
 # 状态机和状态图简介
 
 - 状态 states

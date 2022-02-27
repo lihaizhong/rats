@@ -1,10 +1,3 @@
-<!--
- Copyright (c) 2022 Sangbaipi
-
- This software is released under the MIT License.
- https://opensource.org/licenses/MIT
--->
-
 # 入门
 
 ## 状态机的基本配置结构
