@@ -25,6 +25,7 @@
     "printWidth": 100
   },
   "devDependencies": {
+    "@codesandbox/sandpack-client": "^0.14.4",
     "eslint": "^8.8.0",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-import": "^2.25.4",

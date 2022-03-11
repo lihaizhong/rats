@@ -1,5 +1,7 @@
 # 状态机的副作用
 
+## delays
+
 ## guards
 
 > (context: any) => boolean
