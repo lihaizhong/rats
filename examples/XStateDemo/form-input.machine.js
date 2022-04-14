@@ -1,6 +1,6 @@
 import { assign, createMachine } from 'xstate'
 
-createMachine(
+const FormInputMachine = createMachine(
   {
     id: 'formInput',
     initial: 'active',
@@ -82,3 +82,5 @@ createMachine(
     }
   }
 )
+
+export { FormInputMachine }

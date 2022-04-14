@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "## 小白的杂记、学习与演示",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "serve": "serve -p 3001 --debug ./",
-    "test": "jest --coverage"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,7 +24,12 @@
     "printWidth": 100
   },
   "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/plugin-transform-modules-commonjs": "^7.17.7",
+    "@babel/preset-env": "^7.16.11",
     "@codesandbox/sandpack-client": "^0.14.8",
+    "@types/jest": "^27.4.1",
+    "babel-jest": "^27.5.1",
     "eslint": "^8.10.0",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-import": "^2.25.4",
