@@ -5,11 +5,35 @@
   "version": "0.2.0",
   "configurations": [
     {
+      // 代表着调试器的类型。它决定了 VS Code 会使用哪个调试插件来调试代码。
       "type": "chrome",
+      // 代表着该如何启动调试器。如果我们的代码已经运行起来了，
+      // 则可以将它的值设为 attach，那么我们则是使用调试器来调试这个已有的代码进程；
+      // 而如果它的值是 launch，则意味着我们会使用调试器直接启动代码并且调试。
       "request": "launch",
-      "name": "Vue:Chrome:Launch",
-      "url": "http://localhost:3001",
-      "webRoot": "${workspaceFolder}/learn/VueLearn/modules/"
+      // 就是这个配置的名字了。
+      "name": "启动程序",
+      // 就是告诉 Node.js 调试器，我们想要调试哪个文件。
+      // 这个值支持预定义参数，比如在上面的例子里，我们使用了${file}，也就是当前编辑器里打开的文件。
+      // ------------- 预设置定义 ---------------
+      // ${workspaceFolder} - the path of the folder opened in VS Code
+      // ${workspaceFolderBasename} - the name of the folder opened in VS Code without any slashes (/)
+      // ${file} - the current opened file
+      // ${fileWorkspaceFolder} - the current opened file's workspace folder
+      // ${relativeFile} - the current opened file relative to workspaceFolder
+      // ${relativeFileDirname} - the current opened file's dirname relative to workspaceFolder
+      // ${fileBasename} - the current opened file's basename
+      // ${fileBasenameNoExtension} - the current opened file's basename with no file extension
+      // ${fileDirname} - the current opened file's dirname
+      // ${fileExtname} - the current opened file's extension
+      // ${cwd} - the task runner's current working directory upon the startup of VS Code
+      // ${lineNumber} - the current selected line number in the active file
+      // ${selectedText} - the current selected text in the active file
+      // ${execPath} - the path to the running VS Code executable
+      // ${defaultBuildTask} - the name of the default build task
+      // ${pathSeparator} - the character used by the operating system to separate components in file paths
+      "program": "${workspaceFolder}/index.js",
+      
     }
   ]
 }
