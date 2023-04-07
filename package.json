@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "## 小白的杂记、学习与演示",
   "scripts": {
-    "serve": "serve -p 3001 .",
+    "build": "zx .scripts/npm-build.js",
+    "serve": "serve -p 3001 ./examples/",
     "parcel": "parcel serve ./examples/PostMessageDemo/**/*.html"
   },
   "repository": {
@@ -19,7 +20,8 @@
   "devDependencies": {
     "parcel": "^2.8.3",
     "serve": "^14.2.0",
-    "typescript": "^5.0.3"
+    "typescript": "^5.0.3",
+    "zx": "^7.2.1"
   },
   "dependencies": {
     "@codesandbox/sandpack-client": "^2.4.0",
