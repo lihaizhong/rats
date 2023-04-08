@@ -7,4 +7,4 @@
  * https://webrtc.github.io/samples/
  */
 
-import WebRTCAdapter from 'webrtc-adapter'
+// import WebRTCAdapter from 'webrtc-adapter'

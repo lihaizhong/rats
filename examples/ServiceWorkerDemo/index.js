@@ -7,7 +7,7 @@ const PageUtils = {
     //* NOTE 引用文件地址是相对于URL的，而不是相对于引用这个文件的地址
     //* NOTE scope是选填的，可以用于指定控制内容的子目录
     navigator.serviceWorker
-      .register('/sw.js?t=v1')
+      .register(new URL('./sw.js?t=v1', import.meta.url))
       .then(function (registration) {
         const sw = registration.installing || registration.waiting || registration.active || null
 
