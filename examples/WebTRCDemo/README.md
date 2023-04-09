@@ -16,3 +16,9 @@ WebRTC提供了点对点（浏览器到浏览器）之间的通信，但并不�
 5. 外界所看到的的网络上的数据，比如IP地址、端口等
 
 在建立连接之前，浏览器之间显然没有办法传递数据。需要服务器做中转，在浏览器之间传递这些数据，然后建立浏览器之间点对点的连接。
+
+## 资料
+
+- [WebRTC 中文网](https://webrtc.org.cn/)
+- [WebRTC adapter.js是什么以及我们为什么需要它？（一）](https://webrtc.org.cn/adapterjs-1/)
+- [WebRTC adapter.js是什么以及我们为什么需要它？（二）](https://webrtc.org.cn/adapterjs-2/)
