@@ -1,8 +1,4 @@
-/**
- * 二维码基本知识
- * 二维码存在40种尺寸（Version），最小 21 x 21，最大 177 x 177。
- * 计算方法：Size = (Version - 1) x 4
- */
+
 export class QRCode {
   constructor() {
     this.dataMode = 1 << 2

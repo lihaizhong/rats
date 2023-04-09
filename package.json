@@ -24,8 +24,8 @@
     "zx": "^7.2.1"
   },
   "dependencies": {
-    "@codesandbox/sandpack-client": "^2.4.0",
-    "@lihzsky/excelsior-channel": "^0.0.8",
+    "@codesandbox/sandpack-client": "^2.4.5",
+    "@lihzsky/excelsior-channel": "^0.1.2",
     "tapable": "^2.2.1",
     "webrtc-adapter": "^8.2.2"
   }

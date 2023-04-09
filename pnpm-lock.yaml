@@ -2,11 +2,11 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@codesandbox/sandpack-client':
-    specifier: ^2.4.0
-    version: 2.4.0
+    specifier: ^2.4.5
+    version: 2.4.5
   '@lihzsky/excelsior-channel':
-    specifier: ^0.0.8
-    version: 0.0.8
+    specifier: ^0.1.2
+    version: 0.1.2
   tapable:
     specifier: ^2.2.1
     version: registry.nlark.com/tapable@2.2.1
@@ -58,8 +58,8 @@ packages:
       strict-event-emitter: 0.4.6
     dev: false
 
-  /@codesandbox/sandpack-client@2.4.0:
-    resolution: {integrity: sha512-6eg2tfnETSQVm5+7PS+nVTuis76SsP30R4qZfCbBjcUTJxuukJFHSOyne/ij0qddwkyF8HmpV2zWmVgTsi/QFg==}
+  /@codesandbox/sandpack-client@2.4.5:
+    resolution: {integrity: sha512-6Pf5LfBJZosQkOK71qWuuGDpDcDf3/IDpROOIiRDtuGiKQMBNCggB52gef3KkZzTWC503hA/X+KOKcgr8joHaQ==}
     dependencies:
       '@codesandbox/nodebox': 0.1.4
       buffer: 6.0.3
@@ -78,8 +78,8 @@ packages:
       '@lezer/common': 0.15.12
     dev: true
 
-  /@lihzsky/excelsior-channel@0.0.8:
-    resolution: {integrity: sha512-/jdyiHJLfQanNLIx7BJHf+XX7NDMY+9KArkSL9k2YrWe6GjiaVmlPQDCPd7YDUFiO9Zl/jI8zf6IcMqExR3rrg==}
+  /@lihzsky/excelsior-channel@0.1.2:
+    resolution: {integrity: sha512-rEFXB0TfQrFg5JXlUDQkPjHwtCbKqvqq3HTk1Y7X0/v5sIadBCPYL6smY9z6h68hY5jgLVbJdlT1AchzT2VoVg==}
     dev: false
 
   /@lmdb/lmdb-darwin-arm64@2.5.2:
