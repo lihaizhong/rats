@@ -1,60 +1,70 @@
-let nextUnitOfWork = null
-let wipRoot = null
-let currentRoot = null
-let deletions = null
+// 下一个任务单元
+let nextUnitOfWork = null;
+// 根节点
+let wipRoot = null;
+// 当前的根节点
+let currentRoot = null;
+// 待删除的节点集合
+let deletions = null;
 
+/**
+ * 创建文本节点
+ * @param text
+ */
 function createTextElement(text) {
   return {
-    type: 'TEXT_ELEMENT',
+    type: "TEXT_ELEMENT",
     props: {
       nodeValue: text,
       children: [],
     },
-  }
+  };
 }
 
+/**
+ * 创建Dom
+ */
 function createDom(fiber) {
-  const dom = fiber.type == 'TEXT_ELEMENT'
-      ? document.createTextNode('')
-      : document.createElement(fiber.type)
-  const isProperty = key => key !== 'children'
+  const dom =
+    fiber.type == "TEXT_ELEMENT"
+      ? document.createTextNode("")
+      : document.createElement(fiber.type);
+  const isProperty = (key) => key !== "children";
 
   Object.keys(fiber.props)
     .filter(isProperty)
-    .forEach(name => {
-      dom[name] = fiber.props[name]
-    })
+    .forEach((name) => {
+      dom[name] = fiber.props[name];
+    });
 
-  return dom
+  return dom;
 }
 
-function updateDom(dom, prevProps, nextProps) {
-  
-}
+function updateDom(dom, prevProps, nextProps) { }
 
 function commitRoot() {
-  deletions.forEach(commitWork)
+  deletions.forEach(commitWork);
   // add nodes to dom
-  commitWork(wipRoot.child)
-  currentRoot = wipRoot
-  wipRoot = null
+  commitWork(wipRoot.child);
+  currentRoot = wipRoot;
+  wipRoot = null;
 }
 
 function commitWork(fiber) {
-  if (!fiber) return
+  if (!fiber) return;
 
-  const domParent = fiber.parent.dom
+  const domParent = fiber.parent.dom;
 
-  if (fiber.effectTag === 'PLACEMENT' && fiber.dom !== null) {
-    domParent.appendChild(fiber.dom)
-  } else if (fiber.effectTag === 'UPDATE' && fiber.dom !== null) {
-    updateDom(fiber.dom, fiber.alternate.props, fiber.props)
-  } else if (fiber.effectTag === 'DELETION') {
-    domParent.removeChild(fiber.dom)
+  if (fiber.effectTag === "PLACEMENT" && fiber.dom !== null) {
+    domParent.appendChild(fiber.dom);
+  } else if (fiber.effectTag === "UPDATE" && fiber.dom !== null) {
+    updateDom(fiber.dom, fiber.alternate.props, fiber.props);
+  } else if (fiber.effectTag === "DELETION") {
+    domParent.removeChild(fiber.dom);
   }
 
-  commitWork(fiber.child)
-  commitWork(fiber.sibling)
+  commitWork(fiber.child);
+  commitWork(fiber.sibling);
 }
 
 /**
@@ -64,42 +74,42 @@ function commitWork(fiber) {
  * 3. 挑出下一个任务单元
  * @param {any} fiber
  */
-function performUnitOfWork (fiber) {
+function performUnitOfWork(fiber) {
   // add dom node
   if (!fiber.dom) {
-    fiber.dom = createDom(fiber)
+    fiber.dom = createDom(fiber);
   }
 
   // create new fibers
-  const elements = fiber.props.children
+  const elements = fiber.props.children;
 
-  reconcileChildren(fiber, elements)
+  reconcileChildren(fiber, elements);
 
   // return next unit of work
   if (fiber.child) {
-    return fiber.child
+    return fiber.child;
   }
 
-  let nextFiber = fiber
+  let nextFiber = fiber;
 
   while (nextFiber) {
     if (nextFiber.sibling) {
-      return nextFiber.sibling
+      return nextFiber.sibling;
     }
 
-    nextFiber = nextFiber.parent
+    nextFiber = nextFiber.parent;
   }
 }
 
 function reconcileChildren(wipFiber, elements) {
-  let index = 0
-  let oldFiber = wipFiber?.alternate?.child ?? null
-  let preSibling = null
+  let index = 0;
+  let oldFiber = wipFiber?.alternate?.child ?? null;
+  let prevSibling = null;
 
   while (index < elements.length || oldFiber !== null) {
-    const element = elements[index]
-    const sameType = oldFiber && element && element.type === oldFiber.type
-    let newFiber = null
+    const element = elements[index];
+    const sameType = oldFiber && element && element.type === oldFiber.type;
+    let newFiber = null;
 
     if (sameType) {
       // update the node
@@ -109,8 +119,8 @@ function reconcileChildren(wipFiber, elements) {
         dom: oldFiber.dom,
         parent: wipFiber,
         alternate: oldFiber,
-        effectTag: 'UPDATE',
-      }
+        effectTag: "UPDATE",
+      };
     }
 
     if (element && !sameType) {
@@ -121,48 +131,48 @@ function reconcileChildren(wipFiber, elements) {
         dom: null,
         parent: wipFiber,
         alternate: null,
-        effectTag: 'PLACEMENT',
-      }
+        effectTag: "PLACEMENT",
+      };
     }
 
     if (oldFiber && !sameType) {
       // delete the oldFiber's node
-      oldFiber.effectTag = 'DELETION'
-      deletions.push(oldFiber)
+      oldFiber.effectTag = "DELETION";
+      deletions.push(oldFiber);
     }
 
     if (oldFiber) {
-      oldFiber = oldFiber.sibling
+      oldFiber = oldFiber.sibling;
     }
 
     if (index === 0) {
-      fiber.child = newFiber
+      fiber.child = newFiber;
     } else {
-      prevSibling.sibling = newFiber
+      prevSibling.sibling = newFiber;
     }
 
-    preSibling = newFiber
-    index++
+    prevSibling = newFiber;
+    index++;
   }
 }
 
 function workLoop(deadline) {
-  let shouldYield = false
+  let shouldYield = false;
 
   while (nextUnitOfWork && !shouldYield) {
-    nextUnitOfWork = performUnitOfWork(nextUnitOfWork)
-    shouldYield = deadline.timeRemaining() < 1
+    nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+    shouldYield = deadline.timeRemaining() < 1;
   }
 
   if (!nextUnitOfWork && wipRoot) {
-    commitRoot()
+    commitRoot();
   }
 
   // React使用的是scheduler package实现的requestIdleCallback
-  requestIdleCallback(workLoop)
+  requestIdleCallback(workLoop);
 }
 
-requestIdleCallback(workLoop)
+requestIdleCallback(workLoop);
 
 export const OhMyReact = {
   createElement(type, props, ...children) {
@@ -170,13 +180,11 @@ export const OhMyReact = {
       type,
       props: {
         ...props,
-        children: children.map(child =>
-          typeof child === 'object'
-            ? child
-            : createTextElement(child)
+        children: children.map((child) =>
+          typeof child === "object" ? child : createTextElement(child),
         ),
       },
-    }
+    };
   },
 
   render(element, container) {
@@ -184,12 +192,12 @@ export const OhMyReact = {
     wipRoot = {
       dom: container,
       props: {
-        children: [element]
+        children: [element],
       },
-      alternate: currentRoot
-    }
+      alternate: currentRoot,
+    };
 
-    deletions = []
-    nextUnitOfWork = wipRoot
+    deletions = [];
+    nextUnitOfWork = wipRoot;
   },
-}
+};
