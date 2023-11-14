@@ -1,7 +1,13 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { ServerSentEvents } from "./ServerSentEvents.mjs";
 
+/**
+ * 获取静态资源地址
+ * @params {String} url
+ * @returns {String}
+ */
 function getAssetsPath(url) {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
@@ -10,6 +16,11 @@ function getAssetsPath(url) {
   return path.join(__dirname, "../public", __filepath);
 }
 
+/**
+ * 响应请求数据
+ * @param {Request} res
+ * @param  {...any} args
+ */
 function send(res, ...args) {
   res.setHeader("Content-Type", "text/html;charset=utf-8");
   res.end(...args);
@@ -29,10 +40,17 @@ export async function routerFallback(req, res) {
 
 export default {
   "/subscribe": (req, res) => {
-    console.log("订阅成功！");
-    send(res, "订阅成功！");
-  },
-  "/message": (req, res) => {
-    send(res, "hello");
-  },
+    const sse = new ServerSentEvents(req, res)
+
+    // Send a message on connection
+    sse.connect();
+
+    // Send a subsequent message every five seconds
+    setInterval(() => {
+      sse.send(new Date().toLocaleString());
+    }, 5000);
+
+    // Close the connection when the client disconnects
+    req.on("close", () => sse.close());
+  }
 };
