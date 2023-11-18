@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nodejs Server-Sent Events</title>
+  <style></style>
+</head>
+
+<body>
+  <h1>Hello SSE!</h1>
+
+  <h2>List of Server-sent events</h2>
+  <button id="close-btn">关闭连接</button>
+  <ul id="sse-list"></ul>
+
+  <script>
+    function writeMessage(message) {
+      const list = document.getElementById('sse-list');
+      const listItem = document.createElement('li');
+
+      listItem.innerText = message;
+      list.append(listItem);
+    }
+
+    function writeError(error) {
+      const list = document.getElementById('sse-list');
+      const listItem = document.createElement('li');
+
+      listItem.innerHTML = `<pre>【SubscriptionError】${error.message}\n${error.stack}</pre>`;
+      listItem.style.color = 'red';
+      list.append(listItem);
+    }
+
+    /**
+     * 警告：当不通过HTTP/2使用时，SSE（server-sent events）会受到最大连接数的限制，这在打开多个选项卡时特别麻烦，
+     * 因为该限制时针对每个浏览器的，并且被设置为一个非常低的数字（6）。该问题在Chrome和Firefox中被标记为”不会解决“。
+     * 此限制是针对每个浏览器+域的，因此这意味着你可以跨所有选项卡打开6个SSE连接到www.example1.com，并打开6个SSE连
+     * 接到www.example2.com。
+     * 使用HTTP/2时，同一时间内HTTP最大连接数由服务器和客户端之间协商（默认为100）。
+     */
+    const subscription = new EventSource('/subscribe')
+
+    // Default Events
+    subscription.addEventListener('open', () => {
+      writeMessage('Connection opened!')
+    })
+
+    subscription.addEventListener('error', (err) => {
+      writeError(err)
+    })
+
+    subscription.addEventListener('message', (event) => {
+      writeMessage(event.data);
+    })
+
+    // Define Custom Events
+    subscription.addEventListener('connected', () => {
+      writeMessage('Subscription successful!');
+    })
+
+    document.getElementById('close-btn').addEventListener('click', () => {
+      subscription.close();
+      writeMessage('Subscription closed!');
+    }, false)
+  </script>
+</body>
+
+</html>
