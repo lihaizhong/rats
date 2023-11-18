@@ -5,7 +5,7 @@ export class ServerSentEvents {
     this.count = 0;
 
     res.writeHead(200, {
-      "Content-TYpe": "text/event-stream",
+      "Content-Type": "text/event-stream",
       Connection: "keep-alive",
       "Cache-Control": "no-cache",
     });
