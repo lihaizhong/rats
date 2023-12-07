@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "## 小白的杂记、学习与演示",
   "scripts": {
-    "build": "zx .scripts/npm-build.js",
+    "build": "parcel build ./examples/**/*.html",
     "serve": "serve -p 3001 ./dist/",
     "dev": "parcel serve ./examples/**/*.html --lazy"
   },
@@ -20,7 +20,7 @@
   "devDependencies": {
     "parcel": "^2.10.3",
     "serve": "^14.2.1",
-    "typescript": "^5.3.2",
+    "typescript": "^5.3.3",
     "zx": "^7.2.3"
   },
   "dependencies": {

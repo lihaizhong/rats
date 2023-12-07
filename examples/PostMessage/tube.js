@@ -1,5 +1,6 @@
-import { NodePoint, journal } from "@lihzsky/excelsior-channel";
+import { NodePoint, Journal } from "@lihzsky/excelsior-channel";
 
+const journal = new Journal();
 const pointer = new NodePoint();
 
 // 定义远程调用的函数

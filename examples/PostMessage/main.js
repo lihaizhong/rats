@@ -1,6 +1,7 @@
-import { MainPoint, journal } from "@lihzsky/excelsior-channel";
+import { MainPoint, Journal } from "@lihzsky/excelsior-channel";
 
 const frame = document.body.getElementsByTagName('iframe')[0];
+const journal = new Journal();
 const pointer = new MainPoint(frame);
 
 // 定义远程调用的函数
