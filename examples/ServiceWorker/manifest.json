@@ -3,14 +3,36 @@
   "name": "PWA测试",
   "icon": [
     {
-      "src": "",
-      "type": "",
-      "sizes": ""
+      "src": "./static/favicon.64x64.jpg",
+      "type": "image/jpg",
+      "sizes": "64x64"
+    },
+    {
+      "src": "./static/favicon.144x144.jpg",
+      "type": "image/jpg",
+      "sizes": "144x144"
+    },
+    {
+      "src": "./static/favicon.192x192.jpg",
+      "type": "image/jpg",
+      "sizes": "192x192"
+    },
+
+    {
+      "src": "./static/favicon.256x256.jpg",
+      "type": "image/jpg",
+      "sizes": "256x256"
+    },
+    {
+      "src": "./static/favicon.512x512.jpg",
+      "type": "image/jpg",
+      "sizes": "512x512"
     }
   ],
   "start_url": "index.html",
   "scope": "/",
   "background_color": "blue",
   "display": "standalone",
-  "theme_color": "blue"
+  "theme_color": "blue",
+  "orientation": "portrait-primary"
 }
