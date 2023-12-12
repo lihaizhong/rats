@@ -1,3 +1,8 @@
+/**
+ * Chrome For Developers
+ * https://developer.chrome.com/docs/workbox/service-worker-overview?hl=zh-cn
+ */
+
 const REQUEST_PREFIX = '/'
 const SWUtils = {
   cacheContents: [
@@ -40,19 +45,26 @@ const SWUtils = {
       })
     })
   },
-  activate (event) {
-    // 获取所有客户端的控制权
-    return self.clients.claim()
-      .then(() => caches.keys())
-      .then((keyList) => Promise.all(
-        keyList.map((key) => {
-          if (key !== SWUtils.cacheName) {
-            return caches.delete(key)
-          }
+  async activate (event) {
+    // https://web.dev/blog/navigation-preload?hl=zh-cn#the-solution
+    // 检查是否支持导航预缓存
+    if (self.registration.navigationPreload) {
+      // 开启导航预缓存
+      await self.registration.navigationPreload.enable();
+    }
 
-          return Promise.resolve()
-        })
-      ))
+    // 获取所有客户端的控制权
+    await self.clients.claim()
+
+    return Promise.all(
+      caches.keys().map((key) => {
+        if (key !== SWUtils.cacheName) {
+          return caches.delete(key)
+        }
+
+        return Promise.resolve()
+      })
+    )
   }
 }
 
