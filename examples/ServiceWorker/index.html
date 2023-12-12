@@ -12,9 +12,6 @@
 
 <body>
   <header>这是一个ServiceWorker测试页面</header>
-  <div>
-    <a href="javascript:location.reload();">重新刷新</a>
-  </div>
   <!-- 测试图片拦截 -->
   <div>
     <img src="./static/important-notes.png" alt="">
@@ -24,7 +21,30 @@
   <!-- 测试iframe拦截 -->
   <iframe src="./static/sw-lifecycle.png" frameborder="0" width="600" height="800"></iframe>
   <!-- ServiceWorker版本 -->
-  <div id="version"></div>
+  <p id="version"></p>
+  <!-- 电池状态 -->
+  <div>
+    <p>
+      <span>设备是否接入电源：</span>
+      <span id="charging"></span>
+    </p>
+    <p>
+      <span>预计充满需要多久（秒）：</span>
+      <span id="charging-time"></span>
+    </p>
+    <p>
+      <span>预计电池耗尽时间：</span>
+      <span id="discharging-time"></span>
+    </p>
+    <p>
+      <span>电量百分比：</span>
+      <span id="level"></span>
+    </p>
+  </div>
+  <!-- 点击刷新 -->
+  <div>
+    <a href="javascript:location.reload();">重新刷新</a>
+  </div>
   <!-- ServiceWorker安装消息 -->
   <div id="message-container"></div>
 </body>
