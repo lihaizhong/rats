@@ -3,7 +3,7 @@ function injectContent(selector, label, content) {
   console.info(label, content);
 }
 
-function addEventListener(batteryManager) {
+function addEventListeners(batteryManager) {
   // 添加充电状态变化时的处理程序
   batteryManager.addEventListener("chargingchange", () => {
     injectContent("#charging", "设备是否接入电源", formatCharging(batteryManager.charging));
@@ -93,7 +93,7 @@ export function getBatteryStatus() {
       // 如果设备没有电池，则返回1.0。
       injectContent('"#level', "电量百分比", formatLevel(batteryManager.level));
 
-      addEventListener(batteryManager);
+      addEventListeners(batteryManager);
     })
     .catch((error) => console.error(error));
 }
