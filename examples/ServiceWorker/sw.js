@@ -105,7 +105,7 @@ self.addEventListener("message", (event) => {
  */
 self.addEventListener("push", (event) => {
   // node端可以使用`web-push`库来实现push功能。推送消息校验遵循VAPID协议进行身份校验。
-  console.log('接收到push消息', event)
+  console.log('接收到push消息', event, event.data.text())
 });
 
 self.addEventListener("sync", (event) => {

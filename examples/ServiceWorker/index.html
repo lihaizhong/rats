@@ -11,7 +11,10 @@
 </head>
 
 <body>
-  <header>这是一个ServiceWorker测试页面</header>
+  <header>
+    <span>这是一个ServiceWorker测试页面。</span>
+    <a href="javascript:location.reload();">重新刷新</a>
+  </header>
   <!-- ServiceWorker版本 -->
   <p id="version"></p>
   <!-- 电池状态 -->
@@ -21,7 +24,7 @@
       <span id="charging"></span>
     </p>
     <p>
-      <span>预计充满需要多久（秒）：</span>
+      <span>预计充满需要多久：</span>
       <span id="charging-time"></span>
     </p>
     <p>
@@ -30,12 +33,8 @@
     </p>
     <p>
       <span>电量百分比：</span>
-      <span id="level"></span>
+      <span id="electric-quantity"></span>
     </p>
-  </div>
-  <!-- 点击刷新 -->
-  <div>
-    <a href="javascript:location.reload();">重新刷新</a>
   </div>
   <!-- ServiceWorker安装消息 -->
   <div id="message-container"></div>
