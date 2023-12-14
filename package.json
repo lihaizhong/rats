@@ -1,11 +1,11 @@
 {
   "name": "rats",
   "version": "1.0.0",
-  "description": "## 小白的杂记、学习与演示",
+  "description": "小白的学习与演示",
   "scripts": {
-    "build": "parcel build ./examples/**/*.html",
+    "build": "parcel build ./src/index.html ./src/**/*.html",
     "serve": "serve -p 3001 ./dist/",
-    "dev": "parcel serve ./examples/**/*.html --lazy"
+    "dev": "parcel serve ./src/index.html ./src/**/*.html --open chrome"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,11 @@
   "devDependencies": {
     "@parcel/packager-raw-url": "2.10.3",
     "@parcel/transformer-webmanifest": "2.10.3",
+    "autoprefixer": "^10.4.16",
     "parcel": "^2.10.3",
+    "postcss": "^8.4.32",
     "serve": "^14.2.1",
+    "tailwindcss": "^3.3.6",
     "typescript": "^5.3.3",
     "zx": "^7.2.3"
   },
@@ -30,6 +33,6 @@
     "@lihzsky/excelsior-channel": "^0.1.8",
     "tapable": "^2.2.1",
     "webrtc-adapter": "^8.2.3",
-    "webtorrent": "^2.1.30"
+    "webtorrent": "^2.1.32"
   }
 }

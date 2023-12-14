@@ -1,5 +1,3 @@
-import { getBatteryStatus } from "./battery";
-
 const VERSION = "1.0.0";
 const PageUtils = {
   injectVersion(version) {
@@ -83,8 +81,6 @@ async function main() {
 
     ServiceWorkerUtils.listenStateChange(registration);
   }
-
-  getBatteryStatus();
 }
 
 window.onload = main;

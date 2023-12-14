@@ -81,6 +81,7 @@ function addEventListeners(batteryManager) {
 
 export async function getBatteryStatus() {
   if (typeof navigator.getBattery !== "function") {
+    console.error('当前浏览器不支持"navigator.getBattery"功能');
     return null;
   }
 
