@@ -1,4 +1,4 @@
-import { install } from "./WebComponent/index"
+// import { install } from "./WebComponent/index"
 import { getBatteryStatus } from "./battery";
 
 function main() {
@@ -6,6 +6,6 @@ function main() {
 }
 
 
-install()
+// install()
 
 window.onload = main;
