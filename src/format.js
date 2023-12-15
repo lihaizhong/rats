@@ -16,7 +16,7 @@ export function formatRemainTime(timestamp) {
     const gap = gaps[i];
     const t = Math.floor(remain / gap.pre);
 
-    remain -= t * 60;
+    remain -= t * gap.pre;
 
     if (t !== 0) {
       timeStr += t + gap.unit;
@@ -32,4 +32,8 @@ export function formatElectricQuantity(level) {
 
 export function formatCharging(charging) {
   return charging ? "正在充电" : "未接入电源";
+}
+
+export function formatBoolean(bool) {
+  return bool ? "是" : "否";
 }

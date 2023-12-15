@@ -1,4 +1,5 @@
 import { injectContent } from "./utils";
+import { formatBoolean } from "./format";
 
 function addEventListeners() {
   window.addEventListener("online", () => {});
@@ -40,7 +41,7 @@ export function getNetworkStatus() {
    * 毫秒，表示当前网络实际的往返时间，舍入为最接近的25ms。
    * * 这个值可能根据历史网络吞吐量计算，也可能根据连接技术的能力来计算。
    */
-  injectContent("#rtt", "当前网络实际的往返时间", navigator.connection.rtt);
+  injectContent("#rtt", "当前网络实际的往返时间", navigator.connection.rtt + 'ms');
   /**
    * 字符串枚举值，表示网络连接技术。
    * * 可能得值：
@@ -61,7 +62,7 @@ export function getNetworkStatus() {
   injectContent(
     "#connection-save-data",
     "用户设备是否启用了“节流(reduced data)”模式",
-    navigator.connection.saveData
+    formatBoolean(navigator.connection.saveData)
   );
 
   addEventListeners();
