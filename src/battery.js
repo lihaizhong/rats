@@ -37,7 +37,7 @@ const Format = {
 };
 
 function injectContent(selector, label, content) {
-  document.querySelector(selector).textContent = content;
+  document.querySelector(selector).value = content;
   console.info(label, content);
 }
 
