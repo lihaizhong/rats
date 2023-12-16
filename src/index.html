@@ -4,8 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <!-- 应用的标题 -->
+  <meta name="apple-mobile-web-app-title" content="PWA测试">
+  <!-- 类似于manifest中的display的功能，通过设置为yes可以进入standalone模式。 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- 这会改变iOS移动设备的状态栏的样式，并且只有在standalone模式中才会有效果。不过在iPhoneX上black会导致状态栏不显示任何东西。 -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="blue">
   <title>入口</title>
   <link rel="manifest" href="./manifest.json">
+  <!-- 桌面图标。其中还可以添加sizes属性，来指示系统使用在各类平台（iphone、ipad…）中使用最合适的图标。 -->
+  <link rel="apple-touch-icon" href="./static/favicon.512x512.jpg">
   <link rel="stylesheet" href="./index.css">
   <script type="module" src="./index.js"></script>
 </head>
