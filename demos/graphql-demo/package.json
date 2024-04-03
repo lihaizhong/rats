@@ -10,7 +10,7 @@
   "author": "lihzsky",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
+    "express": "^4.19.2",
     "graphql": "^16.8.1",
     "graphql-http": "^1.22.0",
     "sqlite3": "^5.1.6"
