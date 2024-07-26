@@ -34,13 +34,13 @@ async function main() {
   // })
   // console.log('🎉恭喜你，成功了！', user)
 
-  const usersWithPosts = await prisma.user.findMany({
-    include: {
-      posts: true
-    }
-  })
-
-  console.dir(usersWithPosts, { depth: null })
+  // const usersWithPosts = await prisma.user.findMany({
+  //   include: {
+  //     posts: true
+  //   }
+  // })
+  // console.log('🎉恭喜你，成功了！')
+  // console.dir(usersWithPosts, { depth: null })
 }
 
 main()
