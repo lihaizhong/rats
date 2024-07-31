@@ -5,6 +5,7 @@
         "jscheckstyle",
         "QLID",
         "sandpack",
+        "tailwindcss",
         "tapable",
         "webrtc"
     ]
