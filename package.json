@@ -18,21 +18,21 @@
   },
   "homepage": "https://github.com/lihaizhong/rats#readme",
   "devDependencies": {
-    "@parcel/packager-raw-url": "2.10.3",
-    "@parcel/transformer-webmanifest": "2.10.3",
-    "autoprefixer": "^10.4.16",
-    "parcel": "^2.10.3",
-    "postcss": "^8.4.32",
-    "serve": "^14.2.1",
-    "tailwindcss": "^3.3.6",
-    "typescript": "^5.3.3",
-    "zx": "^7.2.3"
+    "@parcel/packager-raw-url": "2.12.0",
+    "@parcel/transformer-webmanifest": "2.12.0",
+    "autoprefixer": "^10.4.19",
+    "parcel": "^2.12.0",
+    "postcss": "^8.4.40",
+    "serve": "^14.2.3",
+    "tailwindcss": "^3.4.7",
+    "typescript": "^5.5.4",
+    "zx": "^8.1.4"
   },
   "dependencies": {
-    "@codesandbox/sandpack-client": "^2.10.0",
+    "@codesandbox/sandpack-client": "^2.18.1",
     "@lihzsky/excelsior-channel": "^0.1.8",
     "tapable": "^2.2.1",
-    "webrtc-adapter": "^8.2.3",
-    "webtorrent": "^2.1.32"
+    "webrtc-adapter": "^9.0.1",
+    "webtorrent": "^2.4.14"
   }
 }
