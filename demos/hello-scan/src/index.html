@@ -4,8 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>扫描二维码</title>
+  <style>
+    html,body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .scan-stage {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+  <script type="module" src="./index.js"></script>
 </head>
 <body>
-
+  <div class="scanner">
+    <video id="video-scanner" class="scan-stage"></video>
+  </div>
 </body>
 </html>
