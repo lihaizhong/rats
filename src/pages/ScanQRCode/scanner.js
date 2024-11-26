@@ -1,6 +1,6 @@
 import jsQR from 'jsqr'
 import VideoKit from './videoKit'
-import Interval from './interval'
+import IntervalKit from './IntervalKit'
 
 export default class Scanner {
   #videoKit
@@ -33,24 +33,24 @@ export default class Scanner {
   #doStart() {
     return new Promise((resolve, reject) => {
       // 设置定时器，识别二维码
-      const interval = new Interval(() => {
+      const intervalKit = new IntervalKit(() => {
         try {
           const result = this.#doScan()
 
           // 识别成功的处理
           if (result?.data) {
-            interval.stop()
+            intervalKit.stop()
             this.#singleton = null
             resolve(result)
           }
         } catch (ex) {
-          interval.stop()
+          intervalKit.stop()
           this.#singleton = null
           reject(ex)
         }
       })
 
-      interval.start()
+      intervalKit.start()
     })
   }
 

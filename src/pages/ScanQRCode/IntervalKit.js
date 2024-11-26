@@ -1,4 +1,4 @@
-export default class Interval {
+export default class IntervalKit {
   #callback
   #loop
   #latestTime
