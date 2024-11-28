@@ -7,7 +7,7 @@
   <!-- 应用的标题 -->
   <meta name="apple-mobile-web-app-title" content="PWA测试">
   <!-- 类似于manifest中的display的功能，通过设置为yes可以进入standalone模式。 -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <!-- 这会改变iOS移动设备的状态栏的样式，并且只有在standalone模式中才会有效果。不过在iPhoneX上black会导致状态栏不显示任何东西。 -->
   <meta name="apple-mobile-web-app-status-bar-style" content="blue">
   <title>入口</title>
@@ -15,14 +15,15 @@
   <!-- 桌面图标。其中还可以添加sizes属性，来指示系统使用在各类平台（iphone、ipad…）中使用最合适的图标。 -->
   <link rel="apple-touch-icon" href="./static/favicon.512x512.jpg">
   <link rel="stylesheet" href="./index.css">
+  <!-- <script type="module" src="./web-components/index.js"></script> -->
   <script type="module" src="./index.js"></script>
 </head>
 <body>
   <h1 class="flex items-center h-12 px-3 border-b text-xl bg-slate-100">电池</h1>
-  <!-- <cc-cell label="设备是否接入电源：" id="charging"></cc-cell>
-  <cc-cell label="预计充满需要多久：" id="charging-time"></cc-cell>
-  <cc-cell label="预计电池耗尽时间：" id="discharging-time"></cc-cell>
-  <cc-cell label="电量百分比：" id="electric-quantity"></cc-cell> -->
+  <!-- <cc-cell label="设备是否接入电源：" id="charging"></cc-cell> -->
+  <!-- <cc-cell label="预计充满需要多久：" id="charging-time"></cc-cell> -->
+  <!-- <cc-cell label="预计电池耗尽时间：" id="discharging-time"></cc-cell> -->
+  <!-- <cc-cell label="电量百分比：" id="electric-quantity"></cc-cell> -->
   <div class="flex items-center h-11 border-b px-3 bg-slate-50">
     <div>设备是否接入电源：</div>
     <div id="charging" class="flex-1"></div>
