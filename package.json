@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "小白的学习与演示",
   "scripts": {
+    "dev": "parcel serve ./src/index.html ./src/**/*.html --open chrome",
     "build": "parcel build ./src/index.html ./src/**/*.html",
-    "serve": "serve -p 3001 ./dist/",
-    "dev": "parcel serve ./src/index.html ./src/**/*.html --open chrome"
+    "preview": "serve -p 3001 ./dist/"
   },
   "repository": {
     "type": "git",
