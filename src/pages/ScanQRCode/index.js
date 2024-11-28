@@ -2,7 +2,7 @@
  * 参考资料：[前端实现很哇塞的浏览器端扫码功能](https://segmentfault.com/a/1190000040809122)
  */
 
-import Scanner from './scanner'
+import Scanner from './Scanner'
 
 window.onload = async function onload() {
   try {

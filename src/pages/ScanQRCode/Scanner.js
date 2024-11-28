@@ -1,5 +1,5 @@
 import jsQR from 'jsqr'
-import VideoKit from './videoKit'
+import VideoKit from './VideoKit'
 import IntervalKit from './IntervalKit'
 
 export default class Scanner {
