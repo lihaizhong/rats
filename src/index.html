@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <!-- 应用的标题 -->
-  <meta name="apple-mobile-web-app-title" content="PWA测试">
+  <meta name="apple-mobile-web-app-title" content="小白鼠">
   <!-- 类似于manifest中的display的功能，通过设置为yes可以进入standalone模式。 -->
   <meta name="mobile-web-app-capable" content="yes">
   <!-- 这会改变iOS移动设备的状态栏的样式，并且只有在standalone模式中才会有效果。不过在iPhoneX上black会导致状态栏不显示任何东西。 -->
   <meta name="apple-mobile-web-app-status-bar-style" content="blue">
-  <title>入口</title>
+  <title>小白鼠</title>
   <link rel="manifest" href="./manifest.json">
   <!-- 桌面图标。其中还可以添加sizes属性，来指示系统使用在各类平台（iphone、ipad…）中使用最合适的图标。 -->
   <link rel="apple-touch-icon" href="./static/favicon.512x512.jpg">
@@ -19,93 +19,88 @@
   <script type="module" src="./index.js"></script>
 </head>
 <body>
-  <h1 class="flex items-center h-12 px-3 border-b text-xl bg-slate-100">电池</h1>
-  <!-- <cc-cell label="设备是否接入电源：" id="charging"></cc-cell> -->
-  <!-- <cc-cell label="预计充满需要多久：" id="charging-time"></cc-cell> -->
-  <!-- <cc-cell label="预计电池耗尽时间：" id="discharging-time"></cc-cell> -->
-  <!-- <cc-cell label="电量百分比：" id="electric-quantity"></cc-cell> -->
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div>设备是否接入电源：</div>
-    <div id="charging" class="flex-1"></div>
-  </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div>预计充满需要多久：</div>
-    <div id="charging-time" class="flex-1"></div>
-  </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div>预计电池耗尽时间：</div>
-    <div id="discharging-time" class="flex-1"></div>
-  </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div>电量百分比：</div>
-    <div id="electric-quantity" class="flex-1"></div>
-  </div>
-  <h1 class="flex items-center h-12 px-3 border-b text-xl bg-slate-100">网络</h1>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div>当前设备的带宽：</div>
-    <div id="downlink" class="flex-1"></div>
-  </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div>当前设备最大的下行带宽：</div>
-    <div id="downlink-max" class="flex-1"></div>
-  </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div>连接速度和质量：</div>
-    <div id="effective-type" class="flex-1"></div>
-  </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div>当前网络实际的往返时间：</div>
-    <div id="rtt" class="flex-1"></div>
-  </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div>网络连接技术：</div>
-    <div id="connection-type" class="flex-1"></div>
-  </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div>用户设备是否启用了“节流(reduced data)”模式：</div>
-    <div id="connection-save-data" class="flex-1"></div>
-  </div>
-  <h1 class="flex items-center h-12 px-3 border-b text-xl bg-slate-100">导航</h1>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div></div>
-    <div class="flex-1">
-      <a href="./pages/MutationObserver/index.html">MutationObserver</a>
+  <div>
+    <h1 class="flex items-center h-12 px-3 border-b text-xl bg-slate-100">电池</h1>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div>设备是否接入电源：</div>
+      <div id="charging" class="flex-1"></div>
+    </div>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div>预计充满需要多久：</div>
+      <div id="charging-time" class="flex-1"></div>
+    </div>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div>预计电池耗尽时间：</div>
+      <div id="discharging-time" class="flex-1"></div>
+    </div>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div>电量百分比：</div>
+      <div id="electric-quantity" class="flex-1"></div>
     </div>
   </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div></div>
-    <div class="flex-1">
-      <a href="./pages/PostMessage/main.html">PostMessage</a>
+  <div>
+    <h1 class="flex items-center h-12 px-3 border-b text-xl bg-slate-100">网络</h1>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div>当前设备的带宽：</div>
+      <div id="downlink" class="flex-1"></div>
+    </div>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div>当前设备最大的下行带宽：</div>
+      <div id="downlink-max" class="flex-1"></div>
+    </div>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div>连接速度和质量：</div>
+      <div id="effective-type" class="flex-1"></div>
+    </div>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div>当前网络实际的往返时间：</div>
+      <div id="rtt" class="flex-1"></div>
+    </div>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div>网络连接技术：</div>
+      <div id="connection-type" class="flex-1"></div>
+    </div>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div>用户设备是否启用了“节流(reduced data)”模式：</div>
+      <div id="connection-save-data" class="flex-1"></div>
     </div>
   </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div></div>
-    <div class="flex-1">
-      <a href="./pages/QRCode/index.html">QRCode</a>
+  <div>
+    <h1 class="flex items-center h-12 px-3 border-b text-xl bg-slate-100">导航</h1>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div class="flex-1">
+        <a href="./pages/MutationObserver/index.html">MutationObserver</a>
+      </div>
     </div>
-  </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div></div>
-    <div class="flex-1">
-      <a href="./pages/ScanQRCode/index.html">ScanQRCode</a>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div class="flex-1">
+        <a href="./pages/PostMessage/main.html">PostMessage</a>
+      </div>
     </div>
-  </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div></div>
-    <div class="flex-1">
-      <a href="./pages/ServiceWorker/index.html">ServiceWorker</a>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div class="flex-1">
+        <a href="./pages/QRCode/index.html">QRCode</a>
+      </div>
     </div>
-  </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div></div>
-    <div class="flex-1">
-      <a href="./pages/WebpackTapable/index.html">WebpackTapable</a>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div class="flex-1">
+        <a href="./pages/ScanQRCode/index.html">ScanQRCode</a>
+      </div>
     </div>
-  </div>
-  <div class="flex items-center h-11 border-b px-3 bg-slate-50">
-    <div></div>
-    <div class="flex-1">
-      <a href="./pages/WebRTC/index.html">WebRTC</a>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div class="flex-1">
+        <a href="./pages/ServiceWorker/index.html">ServiceWorker</a>
+      </div>
+    </div>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div class="flex-1">
+        <a href="./pages/WebpackTapable/index.html">WebpackTapable</a>
+      </div>
+    </div>
+    <div class="flex items-center h-11 border-b px-3 bg-slate-50">
+      <div class="flex-1">
+        <a href="./pages/WebRTC/index.html">WebRTC</a>
+      </div>
     </div>
   </div>
 </body>

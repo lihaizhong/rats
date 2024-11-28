@@ -28,7 +28,5 @@ function watchCustomElementDefined() {
     })
 }
 
-export function install() {
-  defineCustomElements();
-  watchCustomElementDefined();
-}
+defineCustomElements();
+watchCustomElementDefined();
