@@ -1,7 +1,9 @@
-import { getBatteryStatus } from "./battery";
-import { getNetworkStatus } from "./network";
+import { initBatteryStatus } from "./utils/battery";
+import { initNetworkStatus } from "./utils/network";
 
 window.onload = function main() {
-  getBatteryStatus();
-  getNetworkStatus();
+  // 初始化电池状态
+  initBatteryStatus();
+  // 初始化网络状态
+  initNetworkStatus();
 }

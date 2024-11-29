@@ -1,4 +1,4 @@
-import { injectContent } from "./utils";
+import { injectContent } from "./inject";
 import { formatBoolean, formatConnectionType, formatRTT, formatBrandWidth } from "./format";
 
 function addEventListeners() {
@@ -8,7 +8,7 @@ function addEventListeners() {
   navigator.connection.onchange = () => {};
 }
 
-export function getNetworkStatus() {
+export function initNetworkStatus() {
   const {
     downlink,
     downlinkMax,

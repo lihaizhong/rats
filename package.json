@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "parcel serve ./src/index.html ./src/**/*.html",
     "build": "parcel build ./src/index.html ./src/**/*.html",
-    "preview": "serve -p 3001 ./dist/"
+    "preview": "serve -p 3001 ./dist/",
+    "cleanup": "rimraf -f dist .parcel-cache"
   },
   "repository": {
     "type": "git",
@@ -29,9 +30,9 @@
     "zx": "^8.2.2"
   },
   "dependencies": {
-    "@codesandbox/sandpack-client": "^2.19.8",
     "@lihzsky/excelsior-channel": "^0.1.8",
     "jsqr": "^1.4.0",
+    "rimraf": "^6.0.1",
     "tapable": "^2.2.1",
     "webrtc-adapter": "^9.0.1",
     "webtorrent": "^2.5.7"

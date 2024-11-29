@@ -1,4 +1,4 @@
-import { injectContent } from "./utils";
+import { injectContent } from "./inject";
 import { formatRemainTime, formatElectricQuantity, formatCharging } from "./format";
 
 function addEventListeners(batteryManager) {
@@ -39,7 +39,7 @@ function addEventListeners(batteryManager) {
   });
 }
 
-export async function getBatteryStatus() {
+export async function initBatteryStatus() {
   if (typeof navigator.getBattery !== "function") {
     console.error('当前浏览器不支持"navigator.getBattery"功能');
     return null;
