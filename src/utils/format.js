@@ -1,6 +1,10 @@
-export function formatRemainTime(timestamp, defaultValue = '') {
+export function formatRemainTime(timestamp, zeroValue = '', infiniteValue = '') {
   if (!isFinite(timestamp)) {
-    return '未知';
+    return infiniteValue;
+  }
+
+  if (timestamp === 0) {
+    return zeroValue;
   }
 
   const gaps = [
@@ -28,7 +32,7 @@ export function formatRemainTime(timestamp, defaultValue = '') {
     }
   }
 
-  return timeStr === '' ? defaultValue : timeStr;
+  return timeStr;
 }
 
 export function formatElectricQuantity(level) {

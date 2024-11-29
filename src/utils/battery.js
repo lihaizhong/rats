@@ -16,7 +16,7 @@ function addEventListeners(batteryManager) {
     injectContent(
       "#charging-time",
       "预计充满需要多久",
-      formatRemainTime(batteryManager.chargingTime, '已充满')
+      formatRemainTime(batteryManager.chargingTime, '已充满', '未知')
     );
   });
 
@@ -25,7 +25,7 @@ function addEventListeners(batteryManager) {
     injectContent(
       "#discharging-time",
       "预计电池耗尽时间",
-      formatRemainTime(batteryManager.dischargingTime, '已耗尽')
+      formatRemainTime(batteryManager.dischargingTime, '已耗尽', '未知')
     );
   });
 
@@ -60,14 +60,14 @@ export async function initBatteryStatus() {
   injectContent(
     "#charging-time",
     "预计充满需要多久",
-    formatRemainTime(batteryManager.chargingTime, '已充满')
+    formatRemainTime(batteryManager.chargingTime, '已充满', '未知')
   );
   // 整数，表示预计离电池耗尽还有多少秒。
   // 如果设备没有电池，则返回Infinity。
   injectContent(
     "#discharging-time",
     "预计电池耗尽时间",
-    formatRemainTime(batteryManager.dischargingTime, '已耗尽')
+    formatRemainTime(batteryManager.dischargingTime, '已耗尽', '未知')
   );
   // 浮点数，表示电量百分比。
   // 电量完全耗尽返回0.0，电池充满返回1.0。
