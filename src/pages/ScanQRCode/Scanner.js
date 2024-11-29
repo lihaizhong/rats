@@ -54,6 +54,21 @@ export default class Scanner {
     })
   }
 
+  #getConstraints() {
+    const videoKit = this.#videoKit
+    const constrains = navigator.mediaDevices.getSupportedConstraints()
+    const videoConstraints = videoKit.getRect()
+
+    if (constrains.facingMode) {
+      videoConstraint.facingMode = { exact: 'environment' }
+    }
+
+    return {
+      video: videoConstraints,
+      audio: false
+    }
+  }
+
   scanCode() {
     if (this.#singleton instanceof Promise) {
       return this.#singleton
