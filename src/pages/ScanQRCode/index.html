@@ -10,6 +10,36 @@
       padding: 0;
     }
 
+    .mask {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 253px;
+      height: 253px;
+      border-left: calc((100vw - 253px) / 2) solid rgba(0, 0, 0, 0.95);
+      border-right: calc((100vw - 253px) / 2) solid rgba(0, 0, 0, 0.95);
+      border-top: calc((100vh - 253px) / 3) solid rgba(0, 0, 0, 0.95);
+      border-bottom: calc((100vh - 253px) / 3 * 2) solid rgba(0, 0, 0, 0.95);
+    }
+
+    .mask::before {
+      content: "";
+      display: block;
+      width: 250px;
+      height: 250px;
+      border: 3px solid rgb(227, 55, 59);
+    }
+
+    .mask::after {
+      content: attr(content);
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      color: #fff;
+    }
+
     .scan-stage {
       width: 100vw;
       height: 100vh;
@@ -20,6 +50,7 @@
   <script type="module" src="./index.js"></script>
 </head>
 <body>
+  <div class="mask" content="请将二维码放置扫描框中"></div>
   <video id="video-scanner" class="scan-stage"></video>
 </body>
 </html>
