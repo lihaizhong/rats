@@ -60,13 +60,35 @@ export default class Scanner {
     const videoConstraints = videoKit.getRect()
 
     if (constrains.facingMode) {
-      videoConstraint.facingMode = { exact: 'environment' }
+      videoConstraints.facingMode = { exact: 'user' }
     }
 
     return {
       video: videoConstraints,
       audio: false
     }
+  }
+
+  #catchUserMediaError(err) {
+    if (!(err instanceof Error && err.name === 'OverconstrainedError')) {
+      throw err
+    }
+  }
+
+  #getUserMedia() {
+    const constrains = this.#getConstraints()
+
+    return navigator.mediaDevices
+    .getUserMedia(constrains)
+    .catch((err) => {
+      this.#catchUserMediaError(err)
+
+      return navigator.mediaDevices
+        .getUserMedia({
+          video: true,
+          audio: false
+        })
+    })
   }
 
   scanCode() {
@@ -77,8 +99,7 @@ export default class Scanner {
     if (typeof navigator.mediaDevices?.getUserMedia === 'function') {
       const videoKit = this.#videoKit
 
-      this.#singleton = navigator.mediaDevices
-        .getUserMedia({ video: videoKit.getRect() })
+      this.#singleton = this.#getUserMedia()
         .then(async (stream) => {
           // 视频流设置到video标签中
           videoKit.setVideoSource(stream)
