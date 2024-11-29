@@ -60,7 +60,7 @@ export default class Scanner {
     const videoConstraints = videoKit.getRect()
 
     if (constrains.facingMode) {
-      videoConstraints.facingMode = { exact: 'user' }
+      videoConstraints.facingMode = { exact: 'environment' }
     }
 
     return {
@@ -69,26 +69,22 @@ export default class Scanner {
     }
   }
 
-  #catchUserMediaError(err) {
-    if (!(err instanceof Error && err.name === 'OverconstrainedError')) {
-      throw err
-    }
-  }
-
   #getUserMedia() {
-    const constrains = this.#getConstraints()
+    if ('getUserMedia' in navigator.mediaDevices) {
+      const constrains = this.#getConstraints()
 
-    return navigator.mediaDevices
-    .getUserMedia(constrains)
-    .catch((err) => {
-      this.#catchUserMediaError(err)
+      return navigator.mediaDevices.getUserMedia(constrains)
+        .catch((err) => {
+          if (err instanceof Error && err.name === 'OverconstrainedError') {
+            // 使用降级方案
+            return navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+          }
 
-      return navigator.mediaDevices
-        .getUserMedia({
-          video: true,
-          audio: false
+          throw err
         })
-    })
+    }
+
+    return Promise.reject(new Error('not support'))
   }
 
   scanCode() {
@@ -96,23 +92,18 @@ export default class Scanner {
       return this.#singleton
     }
 
-    if (typeof navigator.mediaDevices?.getUserMedia === 'function') {
-      const videoKit = this.#videoKit
-
-      this.#singleton = this.#getUserMedia()
-        .then(async (stream) => {
-          // 视频流设置到video标签中
-          videoKit.setVideoSource(stream)
-          // 指明视频将内嵌（inline）播放，即在元素的播放区域内。请注意，没有此属性并不意味着视频始终是全屏播放的。
-          videoKit.setPlaysInline(true)
-          // 播放视频
-          await videoKit.play()
-          // 开始扫码
-          return await this.#doStart()
-        })
-    } else {
-      this.#singleton = Promise.reject(new Error('not support'))
-    }
+    this.#singleton = this.#getUserMedia()
+      .then(async (stream) => {
+        const videoKit = this.#videoKit
+        // 视频流设置到video标签中
+        videoKit.setVideoSource(stream)
+        // 指明视频将内嵌（inline）播放，即在元素的播放区域内。请注意，没有此属性并不意味着视频始终是全屏播放的。
+        videoKit.setPlaysInline(true)
+        // 播放视频
+        await videoKit.play()
+        // 开始扫码
+        return await this.#doStart()
+      })
 
     return this.#singleton
   }
