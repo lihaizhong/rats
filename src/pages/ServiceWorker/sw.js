@@ -15,7 +15,7 @@ const SWUtils = {
     `${REQUEST_PREFIX}static/sw-lifecycle.png`,
   ],
   cacheName: "sw_v3",
-  install(event) {
+  install(_event) {
     return caches
       .open(SWUtils.cacheName)
       .then((cache) => cache.addAll(SWUtils.cacheContents))
@@ -46,7 +46,7 @@ const SWUtils = {
       });
     });
   },
-  async activate(event) {
+  async activate(_event) {
     // https://web.dev/blog/navigation-preload?hl=zh-cn#the-solution
     // 检查是否支持导航预缓存
     if (self.registration.navigationPreload) {

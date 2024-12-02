@@ -6,7 +6,8 @@
     "dev": "parcel serve ./src/index.html ./src/**/*.html",
     "build": "parcel build ./src/index.html ./src/**/*.html",
     "preview": "serve -p 3001 ./dist/",
-    "cleanup": "rimraf -rf dist .parcel-cache"
+    "cleanup": "rimraf -rf dist .parcel-cache",
+    "lint": "oxlint"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "@parcel/packager-raw-url": "2.13.2",
     "@parcel/transformer-webmanifest": "2.13.2",
     "autoprefixer": "^10.4.20",
+    "oxlint": "^0.14.0",
     "parcel": "^2.13.2",
     "postcss": "^8.4.49",
     "serve": "^14.2.4",

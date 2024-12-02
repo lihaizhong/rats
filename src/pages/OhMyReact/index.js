@@ -40,7 +40,7 @@ function createDom(fiber) {
   return dom;
 }
 
-function updateDom(dom, prevProps, nextProps) { }
+function updateDom(_dom, _prevProps, _nextProps) { }
 
 function commitRoot() {
   deletions.forEach(commitWork);

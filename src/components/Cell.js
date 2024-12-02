@@ -30,7 +30,6 @@ export class Cell extends HTMLElement {
   }
 
   set value(value) {
-    debugger
     this.setAttribute("value", value);
   }
 
