@@ -1,17 +1,17 @@
 import http from "node:http";
 import config from "./config.mjs";
-import router, { routerFallback } from "./router.mjs";
+import routes, { assetsCallback } from "./router.mjs";
 
 const server = http.createServer(async (request, response) => {
   // 查询路由
-  const routerCallback = router[request.url];
+  const requestCallback = routes[request.url];
 
-  if (typeof routerCallback === "function") {
+  if (typeof requestCallback === "function") {
     // 执行预设方案
-    routerCallback(request, response);
+    requestCallback(request, response);
   } else {
     // 执行降级方案
-    routerFallback(request, response);
+    assetsCallback(request, response);
   }
 });
 

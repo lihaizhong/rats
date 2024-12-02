@@ -26,7 +26,7 @@ function send(res, ...args) {
   res.end(...args);
 }
 
-export async function routerFallback(req, res) {
+export async function assetsCallback(req, res) {
   try {
     const assetsPath = getAssetsPath(req.url);
     const data = await fs.readFile(assetsPath, "binary");
