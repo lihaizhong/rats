@@ -17,3 +17,7 @@
 
 - [前端实现很哇塞的浏览器端扫码功能](https://segmentfault.com/a/1190000040809122)
 - [如何使用JavaScript控制摄像头对焦](https://juejin.cn/post/7438676650818502697)
+- [MediaSource](https://developer.mozilla.org/zh-CN/docs/Web/API/MediaSource)
+- [MediaDevices](https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices)
+- [HTMLMediaElement：srcObject 属性](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement/srcObject)
+- [CanvasRenderingContext2D：getImageData() 方法](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/getImageData)

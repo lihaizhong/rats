@@ -22,3 +22,4 @@ WebRTC提供了点对点（浏览器到浏览器）之间的通信，但并不�
 - [WebRTC 中文网](https://webrtc.org.cn/)
 - [WebRTC adapter.js是什么以及我们为什么需要它？（一）](https://webrtc.org.cn/adapterjs-1/)
 - [WebRTC adapter.js是什么以及我们为什么需要它？（二）](https://webrtc.org.cn/adapterjs-2/)
+- [WebRTC 學習筆記 (1) 基本觀念與流程](https://clairechang.tw/2023/04/25/webrtc/webrtc-intro/)

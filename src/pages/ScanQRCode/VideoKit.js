@@ -31,9 +31,9 @@ export default class VideoKit {
   setVideoSource(stream) {
     const videoRef = this.#videoRef
 
-    if (videoRef.srcObject !== undefined) {
+    if ('srcObject' in videoRef) {
       videoRef.srcObject = stream
-    } else if (videoRef.mozSrcObject !== undefined) {
+    } else if ('mozSrcObject' in videoRef) {
       videoRef.mozSrcObject = stream
     } else if ('createObjectURL' in URL) {
       videoRef.src = URL.createObjectURL(stream)
