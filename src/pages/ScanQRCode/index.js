@@ -1,4 +1,4 @@
-import Scanner from './Scanner'
+import Scanner from './core/Scanner'
 
 window.onload = async function onload() {
   try {
