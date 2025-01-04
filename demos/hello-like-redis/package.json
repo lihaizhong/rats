@@ -1,15 +1,11 @@
 {
-  "name": "hello-stone",
+  "name": "hello-like-redis",
   "version": "1.0.0",
-  "description": "",
+  "description": "## 参考资料",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "LiHZSky",
-  "license": "ISC",
-  "dependencies": {
-    "re2": "^1.21.4"
-  }
+  "license": "ISC"
 }

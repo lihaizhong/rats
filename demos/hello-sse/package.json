@@ -10,6 +10,9 @@
   "keywords": [
     "sse"
   ],
-  "author": "sky",
-  "license": "MIT"
+  "author": "LiHZSky",
+  "license": "MIT",
+  "dependencies": {
+    "find-my-way": "^9.1.0"
+  }
 }
