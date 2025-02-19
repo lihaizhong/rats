@@ -1,3 +1,4 @@
+// 基于zxing的二维码识别 https://github.com/LazarSoft/jsqrcode
 import Scanner from './core/Scanner'
 
 window.onload = async function onload() {
